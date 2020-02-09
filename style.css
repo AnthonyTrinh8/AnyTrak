@@ -43,10 +43,12 @@
   transition: all 0.3s ease 0s;
 }
 
+/* Text becomes colored after hovering over nav items */
 .nav-elements li a:hover {
   color: #0088a9;
 }
 
+/* Three lines on top right, can add mobile functionality later */
 .menu div {
     width: 25px;
     height: 3px;
@@ -54,6 +56,7 @@
     background-color: white;
 }
 
+/* Home page about me, information */
 .content {
   display: flex;
   background-color: #326050;
@@ -65,4 +68,45 @@
   margin-top: 10px;
   text-align: center;
   font-size: 65px;
+}
+
+/* Containfer for all the trains and stations cards*/
+#card-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 90%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* For trains and stations cards, will do specific ones later for styling  */
+.card {
+  flex: 1 30%;
+  border: 2px solid black;
+  padding: 10px;
+  text-align: center;
+  margin: 6px;
+  flex-direction: row;
+}
+
+/* Specific card for routesthrustations */
+.route-card {
+  flex: 1 50%;
+  width: 100%;
+  border: 1px solid #26453e;
+  padding: 5px;
+  text-align: center;
+  margin: 5px;
+}
+
+/* Specific container for routesthrustations */
+#route-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
 }
