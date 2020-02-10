@@ -34,6 +34,10 @@
       </ul>
     </nav>
 
+    <div class="title-header">
+      <h4>Routes</h4>
+    </div>
+
     <main id="route-container">
 
     <section class="route-card">
@@ -88,6 +92,44 @@
     </section>
 
     </main>
+
+    <form class="insert">
+      <div class="middle">
+        <h3>Insert Route</h3>
+      </div>
+      <div class="input-box">
+        <label>Route Name</label>
+        <input type="text" id="route-name">
+      </div>
+      <button class="button" id="submit-station">Submit</button>
+    </form>
+
+    <form class="insert">
+      <div class="middle">
+        <h3>Add Stations to Route</h3>
+      </div>
+      <div class="input-box">
+        <label>Select Route To Add Stations To</label>
+        <select name="route">
+          <option value="01">Route 1</option>
+          <option value="02">Route 2</option>
+          <option value="03">Route 3</option>
+          <option value="04">Route 4</option>
+        </select>
+      </div>
+      <div class="input-box">
+        <label>Select From Available Station</label>
+        <select name="station">
+          <option value="01">Station 1</option>
+          <option value="02">Station 2</option>
+          <option value="03">Station 3</option>
+          <option value="04">Station 4</option>
+        </select>
+      </div>
+      <button class="button" id="submit-station">Submit</button>
+    </form>
+
+
 		<!-- Your page content goes here. -->
   </body>
 </html>

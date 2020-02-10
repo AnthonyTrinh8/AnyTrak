@@ -20,6 +20,21 @@
  letter-spacing: 4px;
 }
 
+.title-header {
+  display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #5f3f54;
+  height: 8vh;
+  width: 100%;
+  border: 1px solid black;
+}
+
 .nav-elements {
   display: flex;
   justify-content: space-around;
@@ -75,10 +90,11 @@
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  width: 90%;
+  width: 100%;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 10px;
 }
 
 /* For trains and stations cards, will do specific ones later for styling  */
@@ -106,7 +122,36 @@
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  width: 90%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
+}
+/* Container to insert boxes */
+.insert {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-grow: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 2px black solid;
+  padding: 5px;
+}
+
+/* Header of insertion */
+.middle {
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  border-bottom: 4px solid grey;
+  flex: 1 20px;
+  padding-left: 5px;
+}
+
+/*One input field*/
+.input-box {
+  margin-top: 5px;
+  padding-left: 5px;
+  flex: 1 20px;
+  min-width: 100%;
 }
