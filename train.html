@@ -5,6 +5,7 @@
     <title>AnyTrak</title>
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
   </head>
   <body>
     <nav class="header">
@@ -35,7 +36,8 @@
     </nav>
 
     <div class="title-header">
-      <h4>Trains</h4>
+      <h4 class="title-name">Trains</h4>
+      <button onclick="showmodal()" class="addbutton">Add Train</button>
     </div>
 
     <main id="card-container">
@@ -131,6 +133,10 @@
         <h3>Insert Train</h3>
       </div>
       <div class="input-box">
+        <label>Train #</label>
+        <input type="text" id="train-number">
+      </div>
+      <div class="input-box">
         <label>Assigned Route</label>
         <input type="text" id="train-route">
       </div>
@@ -150,9 +156,9 @@
         <label>Conductor</label>
         <input type="text" id="train-conductor">
       </div>
-      <button class="button" id="submit-train">Submit</button>
+      <button onclick="inserttrain(); return false;" class="button" id="submit-train">Submit</button>
     </form>
 
-	
+
   </body>
 </html>
