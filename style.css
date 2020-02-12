@@ -101,8 +101,9 @@
   font-size: 65px;
 }
 
-/* Containfer for all the trains and stations cards*/
+/* Container for all the trains and stations cards*/
 #card-container {
+  flex: 4 40%;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
@@ -125,12 +126,37 @@
 
 /* Specific card for routesthrustations */
 .route-card {
-  flex: 1 50%;
+  flex-direction: column;
+  display: flex;
+  flex: 1 1 0px;
   width: 100%;
   border: 1px solid #26453e;
   padding: 5px;
   text-align: center;
   margin: 5px;
+}
+
+/* Route Number text */
+.route-number {
+  font-size: 26px;
+  flex: 4 40%;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Station name text in routesthrustations */
+.stationname {
+  flex: 3 30%;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*Sets flexbox size for stations name for intersection table page */
+.stationsize {
+  flex: 3 30%;
 }
 
 /* Specific container for routesthrustations */

@@ -105,37 +105,38 @@
           Zipcode: 92311
         </div>
       </section>
-
-
-      <form class="insert">
-        <div class="middle">
-          <h3>Insert Station</h3>
-        </div>
-        <div class="input-box">
-          <label>Station Name</label>
-          <input type="text" id="station-name">
-        </div>
-        <div class="input-box">
-          <label>Address</label>
-          <input type="text" id="station-address">
-        </div>
-        <div class="input-box">
-          <label>State</label>
-          <input type="text" id="station-state">
-        </div>
-        <div class="input-box">
-          <label>City</label>
-          <input type="text" id="station-city">
-        </div>
-        <div class="input-box">
-          <label>Zipcode</label>
-          <input type="text" id="station-zipcode">
-        </div>
-        <button class="button" id="submit-station">Submit</button>
-      </form>
-
-
     </main>
-		<!-- Your page content goes here. -->
+    
+    <form class="insert">
+      <div class="middle">
+        <h3>Insert Station</h3>
+      </div>
+      <div class="input-box">
+        <label>Station #</label>
+        <input type="text" id="station-number">
+      </div>
+      <div class="input-box">
+        <label>Station Name</label>
+        <input type="text" id="station-name">
+      </div>
+      <div class="input-box">
+        <label>Address</label>
+        <input type="text" id="station-address">
+      </div>
+      <div class="input-box">
+        <label>State</label>
+        <input type="text" id="station-state">
+      </div>
+      <div class="input-box">
+        <label>City</label>
+        <input type="text" id="station-city">
+      </div>
+      <div class="input-box">
+        <label>Zipcode</label>
+        <input type="text" id="station-zipcode">
+      </div>
+      <button onclick="insertstation(); return false;" class="button" id="submit-station">Submit</button>
+    </form>
+
   </body>
 </html>
