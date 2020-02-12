@@ -5,7 +5,6 @@
     <title>AnyTrak</title>
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
   </head>
   <body>
     <nav class="header">
@@ -39,6 +38,9 @@
       <button onclick="showmodal()" class="addbutton">Add Station</button>
     </div>
 
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Search by State...">
+    </div>
 
 
     <main id="card-container">
@@ -59,7 +61,7 @@
         <div class="station-city">
           City: Portland
         </div>
-        <div class="train-zipcode">
+        <div class="station-zipcode">
           Zipcode: 97231
         </div>
       </section>
@@ -68,7 +70,7 @@
         <div class="station-number">
           Station #2
         </div>
-        <div class="station-number">
+        <div class="station-name">
           Name: Malito
         </div>
         <div class="station-address">
@@ -80,7 +82,7 @@
         <div class="station-city">
           City: Los Angeles
         </div>
-        <div class="train-zipcode">
+        <div class="station-zipcode">
           Zipcode: 77210
         </div>
       </section>
@@ -89,7 +91,7 @@
         <div class="station-number">
           Station #3
         </div>
-        <div class="station-number">
+        <div class="station-name">
           Name: Apolis
         </div>
         <div class="station-address">
@@ -101,12 +103,12 @@
         <div class="station-city">
           City: Seattle
         </div>
-        <div class="train-zipcode">
+        <div class="station-zipcode">
           Zipcode: 92311
         </div>
       </section>
     </main>
-    
+
     <form class="insert">
       <div class="middle">
         <h3>Insert Station</h3>
@@ -137,6 +139,6 @@
       </div>
       <button onclick="insertstation(); return false;" class="button" id="submit-station">Submit</button>
     </form>
-
+    <script src="index.js"></script>
   </body>
 </html>

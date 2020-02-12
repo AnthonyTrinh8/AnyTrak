@@ -79,6 +79,19 @@
   color: #0088a9;
 }
 
+/* Dimensions for search in stations */
+#search-container {
+  flex: 1;
+  background-color: #5f3f54;
+}
+
+/* Search input */
+#search-input {
+  border-radius: 10px;
+  background-color: lightgrey;
+  font-size: 30px;
+}
+
 /* Three lines on top right, can add mobile functionality later */
 .menu div {
     width: 25px;
@@ -103,7 +116,7 @@
 
 /* Container for all the trains and stations cards*/
 #card-container {
-  flex: 4 40%;
+  flex: 5 40%;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
@@ -128,7 +141,7 @@
 .route-card {
   flex-direction: column;
   display: flex;
-  flex: 1 1 0px;
+  flex: 1;
   width: 100%;
   border: 1px solid #26453e;
   padding: 5px;
@@ -157,6 +170,11 @@
 /*Sets flexbox size for stations name for intersection table page */
 .stationsize {
   flex: 3 30%;
+}
+
+/* Removes Border, special condition for stations along a route */
+.noborder {
+  border: none;
 }
 
 /* Specific container for routesthrustations */
