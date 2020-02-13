@@ -37,7 +37,7 @@
 
     <div class="title-header">
       <h4 class="title-name">Trains</h4>
-      <button onclick="showmodal()" class="addbutton">Add Train</button>
+      <button onclick="showmodal()" class="addbutton">Add/Update Trains</button>
     </div>
 
     <main id="card-container">
@@ -159,6 +159,41 @@
       <button onclick="inserttrain(); return false;" class="button" id="submit-train">Submit</button>
     </form>
 
+    <form class="insert">
+      <div class="middle">
+        <h3>Update Train</h3>
+      </div>
+      <div class="input-box">
+        <label>Train #</label>
+        <select name="train">
+          <option value="1">Train 1</option>
+          <option value="2">Train 2</option>
+          <option value="3">Train 3</option>
+          <option value="4">Train 4</option>
+        </select>
+      </div>
+      <div class="input-box">
+        <label>Assigned Route</label>
+        <input type="text" id="train-route">
+      </div>
+      <div class="input-box">
+        <label>Model</label>
+        <input type="text" id="train-model">
+      </div>
+      <div class="input-box">
+        <label>Price</label>
+        <input type="text" id="train-price">
+      </div>
+      <div class="input-box">
+        <label>Capacity</label>
+        <input type="text" id="train-capacity">
+      </div>
+      <div class="input-box">
+        <label>Conductor</label>
+        <input type="text" id="train-conductor">
+      </div>
+      <button onclick="" class="button" id="submit-update-train">Submit</button>
+    </form>
 
   </body>
 </html>

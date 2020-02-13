@@ -37,7 +37,7 @@
 
     <div class="title-header">
       <h4 class="title-name">Routes</h4>
-      <button onclick="showmodal()" class="addbutton">Add Route</button>
+      <button onclick="showmodal()" class="addbutton">Add Routes w/ Stations</button>
     </div>
 
     <main id="route-container">
@@ -52,7 +52,7 @@
       <div id="card-container" class="stationsize">
         <div class="route-card noborder">
           <h2>------> Apolis</h2>
-          <h1>Travel Time: 9:56</h1>
+          <h1>Travel Time:</h1>
         </div>
         <div class="route-card noborder">
           <h2>------> Anaheim</h2>
@@ -75,7 +75,7 @@
       <div id="card-container" class="stationsize">
         <div class="route-card noborder">
           <h2>------> Anaheim</h2>
-          <h1>Travel Time: 1:32</h1>
+          <h1>Travel Time:</h1>
         </div>
         <div class="route-card noborder">
           <h2>------> Marksville</h2>
@@ -98,7 +98,7 @@
       <div id="card-container" class="stationsize">
         <div class="route-card noborder">
           <h2>------> Acletta</h2>
-          <h1>Travel Time: 1:21</h1>
+          <h1>Travel Time:</h1>
         </div>
         <div class="route-card noborder">
           <h2>------> Tailum</h2>
@@ -135,25 +135,23 @@
       <div class="input-box">
         <label>Select Route To Add Stations To</label>
         <select name="route">
-          <option value="01">Route 1</option>
-          <option value="02">Route 2</option>
-          <option value="03">Route 3</option>
-          <option value="04">Route 4</option>
+          <option value="1">Route 1</option>
+          <option value="2">Route 2</option>
+          <option value="3">Route 3</option>
+          <option value="4">Route 4</option>
         </select>
       </div>
       <div class="input-box">
         <label>Select From Available Station</label>
         <select name="station">
-          <option value="01">Station 1</option>
-          <option value="02">Station 2</option>
-          <option value="03">Station 3</option>
-          <option value="04">Station 4</option>
+          <option value="1">Station 1</option>
+          <option value="2">Station 2</option>
+          <option value="3">Station 3</option>
+          <option value="4">Station 4</option>
         </select>
       </div>
       <button onclick="insertstationroute(); return false;" class="button" id="submit-station-route">Submit</button>
     </form>
 
-
-		<!-- Your page content goes here. -->
   </body>
 </html>
