@@ -1,0 +1,27 @@
+{
+  "name": "anytrak",
+  "version": "1.0.0",
+  "description": "AnyTrak",
+  "main": "diagnostic.js",
+  "scripts": {
+    "test": "test",
+    "prestart": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyTrinh8/AnyTrak.git"
+  },
+  "author": "Anthony Trinh, Daniel Safarov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnthonyTrinh8/AnyTrak/issues"
+  },
+  "homepage": "https://github.com/AnthonyTrinh8/AnyTrak#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.7.3",
+    "mysql": "^2.18.1"
+  }
+}

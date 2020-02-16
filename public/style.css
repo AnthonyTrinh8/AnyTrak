@@ -1,0 +1,225 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+.header {
+  font-family: 'Quicksand', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 10vh;
+  background-color: #5f3f54;
+  cursor: pointer;
+}
+
+.title {
+ font-weight: bold;
+ font-size: 30px;
+ text-transform: uppercase;
+ letter-spacing: 4px;
+}
+
+/*Header in main*/
+.title-header {
+  display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #5f3f54;
+  height: 8vh;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.title-name {
+  flex: 8;
+}
+
+.addbutton {
+  flex: 2;
+  width: 20%;
+  height: 8vh;
+  background-color: #3d2936;
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: 1px solid black;
+}
+
+.addbutton:hover {
+  color: black;
+}
+
+.nav-elements {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+  font-size: 15px;
+  color: white;
+}
+
+.nav-elements a {
+   color: white;
+   text-decoration: none;
+   letter-spacing: 3px;
+   text-align: center;
+}
+
+.nav-elements li {
+  list-style: none;
+}
+
+.nav-elements li a {
+  transition: all 0.3s ease 0s;
+}
+
+/* Text becomes colored after hovering over nav items */
+.nav-elements li a:hover {
+  color: #0088a9;
+}
+
+/* Dimensions for search in stations */
+#search-container {
+  flex: 1;
+  background-color: #5f3f54;
+}
+
+/* Search input */
+#search-input {
+  border-radius: 10px;
+  background-color: lightgrey;
+  font-size: 30px;
+}
+
+/* Three lines on top right, can add mobile functionality later */
+.menu div {
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background-color: white;
+}
+
+/* Home page about me, information */
+.content {
+  display: flex;
+  background-color: #326050;
+  flex-flow: column;
+  height: 100vh;
+}
+
+.text {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 65px;
+}
+
+/* Container for all the trains and stations cards*/
+#card-container {
+  flex: 5 40%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+/* For trains and stations cards, will do specific ones later for styling  */
+.card {
+  flex: 1 30%;
+  border: 2px solid black;
+  padding: 10px;
+  text-align: center;
+  margin: 6px;
+  flex-direction: row;
+}
+
+/* Specific card for routesthrustations */
+.route-card {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+  width: 100%;
+  border: 1px solid #26453e;
+  padding: 5px;
+  text-align: center;
+  margin: 5px;
+}
+
+/* Route Number text */
+.route-number {
+  font-size: 26px;
+  flex: 4 40%;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Station name text in routesthrustations */
+.stationname {
+  flex: 3 30%;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*Sets flexbox size for stations name for intersection table page */
+.stationsize {
+  flex: 3 30%;
+}
+
+/* Removes Border, special condition for stations along a route */
+.noborder {
+  border: none;
+}
+
+/* Specific container for routesthrustations */
+#route-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+/* Container to insert boxes */
+.insert {
+  width: 100%;
+  height: auto;
+  display: none;
+  flex-grow: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 2px black solid;
+  padding: 5px;
+}
+
+/* Header of insertion */
+.middle {
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  border-bottom: 4px solid grey;
+  flex: 1 20px;
+  padding-left: 5px;
+}
+
+/*One input field*/
+.input-box {
+  margin-top: 5px;
+  padding-left: 5px;
+  flex: 1 20px;
+  min-width: 100%;
+}
+
+.show {
+  display: flex;
+}
