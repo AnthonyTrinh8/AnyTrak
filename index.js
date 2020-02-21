@@ -7,6 +7,14 @@ function showmodal() {
   }
 }
 
+function showmodal2() {
+  var allboxes = document.getElementsByClassName("update");
+  var i;
+  for (i = 0; i < allboxes.length; i++) {
+    allboxes[i].classList.toggle("show");
+  }
+}
+
 
 /* Inserts Train into flex container */
 function inserttrain() {

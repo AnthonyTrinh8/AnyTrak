@@ -4,11 +4,6 @@
   padding: 0px;
 }
 .header {
-  /* font-family: 'Quicksand', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  min-height: 10vh; */
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -18,15 +13,6 @@
   cursor: pointer;
 }
 
-/* .title {
- font-weight: bold;
- font-size: 30px;
- text-transform: uppercase;
- letter-spacing: 4px;
- background-color: red;
-} */
-
-/*Header in main*/
 .title-header {
   display: flex;
   font-weight: bold;
@@ -36,7 +22,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #5f3f54;
+  background-color: rgb(243, 180, 62);
   height: 8vh;
   width: 100%;
   border: 1px solid black;
@@ -46,18 +32,30 @@
   flex: 8;
 }
 
-.addbutton {
+.buttons {
   flex: 2;
-  width: 20%;
   height: 8vh;
-  background-color: #3d2936;
+  /* background-color: #3d2936; */
   color: white;
-  font-size: 15px;
-  text-transform: uppercase;
-  border: 1px solid black;
+  /* font-size: 15px; */
+  /* border: 1px solid black; */
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
 }
 
-.addbutton:hover {
+.buttons .butt{
+  background-color:rgb(56, 80, 100); /* Blue background color */
+  width: 65%;
+  height: 40%;
+  border-radius: 50px; /* Curve of border corners */
+  text-transform: uppercase; /* Make letters uppercase */
+  color: white; /* Text color */
+}
+
+
+
+.buttons :hover {
   color: black;
 }
 
@@ -71,14 +69,6 @@
 
 }
 
-/* .nav-elements a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-   
-} */
 
 body {
 margin: 0;
@@ -116,21 +106,9 @@ margin-right: 20px;
 float: right;
 }
 
-/* 
-
-.nav-elements li {
-  list-style: none;
+.topnav-right a:hover {
+  color:orange;
 }
-
-.nav-elements li a {
-  transition: all 0.3s ease 0s;
-  
-}
-
-/* Text becomes colored after hovering over nav items */
-/* .nav-elements li a:hover {
-  color: #0088a9;
-}  */
 
 /* Dimensions for search in stations */
 #search-container {
@@ -147,6 +125,7 @@ float: right;
 
 /* Three lines on top right, can add mobile functionality later */
 .menu div {
+    padding: 10px;
     width: 25px;
     height: 3px;
     margin: 5px;
@@ -167,28 +146,64 @@ float: right;
   font-size: 65px;
 }
 
+/* Float four columns side by side */
+.col {
+  float: left;
+  width: 30%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
 /* Container for all the trains and stations cards*/
 #card-container {
   flex: 5 40%;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  width: 100%;
+  /* width: 100%; */
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   padding-bottom: 10px;
 }
 
-/* For trains and stations cards, will do specific ones later for styling  */
+.row {margin: 0 -5px;}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
 .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  margin-top: 10px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+@media screen and (max-width: 600px) {
+  .col {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* For trains and stations cards, will do specific ones later for styling  */
+/* .card {
   flex: 1 30%;
   border: 2px solid black;
   padding: 10px;
   text-align: center;
   margin: 6px;
   flex-direction: row;
-}
+} */
 
 /* Specific card for routesthrustations */
 .route-card {
@@ -251,6 +266,17 @@ float: right;
   padding: 5px;
 }
 
+.update {
+  width: 100%;
+  height: auto;
+  display: none;
+  flex-grow: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 2px black solid;
+  padding: 5px;
+}
+
 /* Header of insertion */
 .middle {
   font-weight: bold;
@@ -263,6 +289,14 @@ float: right;
 
 /*One input field*/
 .input-box {
+  margin-top: 5px;
+  padding-left: 5px;
+  flex: 1 20px;
+  min-width: 100%;
+}
+
+/*One input field*/
+.update-box {
   margin-top: 5px;
   padding-left: 5px;
   flex: 1 20px;

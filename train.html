@@ -18,123 +18,113 @@
             <a href="route.html">Routes</a>
           </div>
         </div>
-          <!-- <nav class="header">
-
-      <div class="title">
-        <h3>AnyTrak</h3>
-      </div>
-      <ul class="nav-elements">
-        <li>
-          <a href="home.html">Home</a>
-        </li>
-        <li>
-          <a href="train.html">Trains</a>
-        </li>
-        <li>
-          <a href="station.html">Stations</a>
-        </li>
-        <li>
-          <a href="route.html">Routes</a>
-        </li>
-        <div class="menu">
-          <div class="l1"></div>
-          <div class="l2"></div>
-          <div class="l3"></div>
-        </div>
-
-      </ul>
-    </nav> -->
 
     <div class="title-header">
       <h4 class="title-name">Trains</h4>
-      <button onclick="showmodal()" class="addbutton">Add/Update Trains</button>
+      <div class="buttons">
+        <button onclick="showmodal()" class="butt">Add a Train</button>
+        <button onclick="showmodal2()" class="butt">Update a Train</button>
+      </div>
+      
+
     </div>
 
     <main id="card-container">
+      <div class="row">
+        
+        <div class="col">
+          <section class="card">
+            <div class="train-number">
+              Train 1
+            </div>
+            <div class="train-route">
+              On Route: #2
+            </div>
+            <div class="train-model">
+              Model: Tier 5
+            </div>
+            <div class="train-price">
+              Price: $5235000
+            </div>
+            <div class="train-capacity">
+              Capacity: 250
+            </div>
+            <div class="train-conductor">
+              Conductor: John Doe
+            </div>
+          </section>
+        </div>
 
-      <section class="card">
-        <div class="train-number">
-          Train 1
+        <div class="col">
+          <section class="card">
+            <div class="train-number">
+              Train 2
+            </div>
+            <div class="train-route">
+              On Route: #3
+            </div>
+            <div class="train-model">
+              Model: Tier 6
+            </div>
+            <div class="train-price">
+              Price: $325000
+            </div>
+            <div class="train-capacity">
+              Capacity: 350
+            </div>
+            <div class="train-conductor">
+              Conductor: Lisa Thomas
+            </div>
+          </section>
         </div>
-        <div class="train-route">
-          On Route: #2
-        </div>
-        <div class="train-model">
-          Model: Tier 5
-        </div>
-        <div class="train-price">
-          Price: $5235000
-        </div>
-        <div class="train-capacity">
-          Capacity: 250
-        </div>
-        <div class="train-conductor">
-          Conductor: John Doe
-        </div>
-      </section>
 
-      <section class="card">
-        <div class="train-number">
-          Train 2
+        <div class="col">
+          <section class="card">
+            <div class="train-number">
+              Train 3
+            </div>
+            <div class="train-route">
+              On Route: #4
+            </div>
+            <div class="train-model">
+              Model: Tier 2
+            </div>
+            <div class="train-price">
+              Price: $150000
+            </div>
+            <div class="train-capacity">
+              Capacity: 200
+            </div>
+            <div class="train-conductor">
+              Conductor: Jeff Fisher
+            </div>
+          </section>
         </div>
-        <div class="train-route">
-          On Route: #3
-        </div>
-        <div class="train-model">
-          Model: Tier 6
-        </div>
-        <div class="train-price">
-          Price: $325000
-        </div>
-        <div class="train-capacity">
-          Capacity: 350
-        </div>
-        <div class="train-conductor">
-          Conductor: Lisa Thomas
-        </div>
-      </section>
 
-      <section class="card">
-        <div class="train-number">
-          Train 3
-        </div>
-        <div class="train-route">
-          On Route: #4
-        </div>
-        <div class="train-model">
-          Model: Tier 2
-        </div>
-        <div class="train-price">
-          Price: $150000
-        </div>
-        <div class="train-capacity">
-          Capacity: 200
-        </div>
-        <div class="train-conductor">
-          Conductor: Jeff Fisher
-        </div>
-      </section>
+        <div class="col">
+          <section class="card">
+            <div class="train-number">
+              Train 1
+            </div>
+            <div class="train-route">
+              On Route: #5
+            </div>
+            <div class="train-model">
+              Model: Tier 3
+            </div>
+            <div class="train-price">
+              Price: $150000
+            </div>
+            <div class="train-capacity">
+              Capacity: 200
+            </div>
+            <div class="train-conductor">
+              Conductor: John Doe
+            </div>
+        </section>
+      </div>
 
-      <section class="card">
-        <div class="train-number">
-          Train 1
-        </div>
-        <div class="train-route">
-          On Route: #5
-        </div>
-        <div class="train-model">
-          Model: Tier 3
-        </div>
-        <div class="train-price">
-          Price: $150000
-        </div>
-        <div class="train-capacity">
-          Capacity: 200
-        </div>
-        <div class="train-conductor">
-          Conductor: John Doe
-        </div>
-      </section>
+    </div>
 
     </main>
 
@@ -169,11 +159,11 @@
       <button onclick="inserttrain(); return false;" class="button" id="submit-train">Submit</button>
     </form>
 
-    <form class="insert">
+    <form class="update">
       <div class="middle">
         <h3>Update Train</h3>
       </div>
-      <div class="input-box">
+      <div class="update-box">
         <label>Train #</label>
         <select name="train">
           <option value="1">Train 1</option>
@@ -182,23 +172,23 @@
           <option value="4">Train 4</option>
         </select>
       </div>
-      <div class="input-box">
+      <div class="update-box">
         <label>Assigned Route</label>
         <input type="text" id="train-route">
       </div>
-      <div class="input-box">
+      <div class="update-box">
         <label>Model</label>
         <input type="text" id="train-model">
       </div>
-      <div class="input-box">
+      <div class="update-box">
         <label>Price</label>
         <input type="text" id="train-price">
       </div>
-      <div class="input-box">
+      <div class="update-box">
         <label>Capacity</label>
         <input type="text" id="train-capacity">
       </div>
-      <div class="input-box">
+      <div class="update-box">
         <label>Conductor</label>
         <input type="text" id="train-conductor">
       </div>
