@@ -46,8 +46,8 @@
 
 .buttons .butt{
   background-color:rgb(56, 80, 100); /* Blue background color */
-  width: 65%;
-  height: 40%;
+  width: 150px;
+  height: 25px;
   border-radius: 50px; /* Curve of border corners */
   text-transform: uppercase; /* Make letters uppercase */
   color: white; /* Text color */
