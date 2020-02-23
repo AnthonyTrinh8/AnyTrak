@@ -135,7 +135,7 @@ float: right;
 /* Home page about me, information */
 .content {
   display: flex;
-  background-color: #326050;
+  background-color: white;
   flex-flow: column;
   height: 100vh;
 }
