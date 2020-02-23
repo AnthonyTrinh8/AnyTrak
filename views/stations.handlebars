@@ -1,0 +1,64 @@
+
+<div class="title-header">
+  <h4 class="title-name">Stations</h4>
+  <button onclick="showmodal()" class="addbutton">Add Stations</button>
+</div>
+
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="Search by State...">
+</div>
+
+
+<main id="card-container">
+
+  {{#each data}}
+  <section class="card">
+    <div class="station-number">
+      Station #{{this.stationID}}
+    </div>
+    <div class="station-name">
+      Name: {{this.stationname}}
+    </div>
+    <div class="station-address">
+      Address: {{this.address}}
+    </div>
+    <div class="station-state">
+      State: {{this.state}}
+    </div>
+    <div class="station-city">
+      City: {{this.city}}
+    </div>
+    <div class="station-zipcode">
+      Zipcode: {{this.zipcode}}
+    </div>
+  </section>
+  {{/each}}
+
+</main>
+
+<form class="insert">
+  <div class="middle">
+    <h3>Insert Station</h3>
+  </div>
+  <div class="input-box">
+    <label>Station Name</label>
+    <input type="text" id="station-name">
+  </div>
+  <div class="input-box">
+    <label>Address</label>
+    <input type="text" id="station-address">
+  </div>
+  <div class="input-box">
+    <label>State</label>
+    <input type="text" id="station-state">
+  </div>
+  <div class="input-box">
+    <label>City</label>
+    <input type="text" id="station-city">
+  </div>
+  <div class="input-box">
+    <label>Zipcode</label>
+    <input type="text" id="station-zipcode">
+  </div>
+  <button onclick="insertstation(); return false;" class="button" id="submit-station">Submit</button>
+</form>
