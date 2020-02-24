@@ -112,8 +112,16 @@ float: right;
 
 /* Dimensions for search in stations */
 #search-container {
-  flex: 1;
-  background-color: #5f3f54;
+  /* flex: 1;
+  background-color: white; */
+
+  float: right;
+  padding: 0px;
+  margin-left: -380px;
+  border: none;
+  margin-top: 0px;
+  margin-right: 16px;
+  font-size: 17px;
 }
 
 /* Search input */
@@ -149,28 +157,36 @@ float: right;
 /* Float four columns side by side */
 .col {
   float: left;
-  width: 30%;
+  width: 300px;
   padding: 0 10px;
 }
 
 /* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
+.row {
+  margin: 0 -5px;
+}
 
 /* Container for all the trains and stations cards*/
 #card-container {
-  flex: 5 40%;
+  /* flex: 5 40%;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  /* width: 100%; */
+  width: 60%;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 10px; */
+  background-color: rgb(214, 214, 211);
+    /* height:380px; */
+    padding: 50px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  
 }
-
-.row {margin: 0 -5px;}
-
 
 .row:after {
   content: "";
@@ -196,21 +212,14 @@ float: right;
 }
 
 /* For trains and stations cards, will do specific ones later for styling  */
-/* .card {
-  flex: 1 30%;
-  border: 2px solid black;
-  padding: 10px;
-  text-align: center;
-  margin: 6px;
-  flex-direction: row;
-} */
+
 
 /* Specific card for routesthrustations */
 .route-card {
   flex-direction: column;
   display: flex;
   flex: 1;
-  width: 100%;
+  width: 100px;
   border: 1px solid #26453e;
   padding: 5px;
   text-align: center;
@@ -224,6 +233,18 @@ float: right;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
+}
+
+.close {
+  cursor: pointer;
+  position: relative;
+  transform: translate(-1%, -45%);
+  padding: 45px 245px;
+
+  /* top: 50%;
+  right: 0%;
+  padding: 12px 16px;
+  transform: translate(0%, -50%); */
 }
 
 /* Station name text in routesthrustations */

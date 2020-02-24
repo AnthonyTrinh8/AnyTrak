@@ -48,80 +48,90 @@
 
     <div class="title-header">
       <h4 class="title-name">Stations</h4>
+          <div id="search-container">
+            <input type="text" id="search-input" placeholder="Search by State...">
+          </div>
+
       <div class="buttons">
         <button onclick="showmodal()" class="butt">Add Stations</button>
       </div>
     </div>
 
-    <div id="search-container">
-      <input type="text" id="search-input" placeholder="Search by State...">
-    </div>
 
 
     <main id="card-container">
+      <div id="row">
 
-      <section class="card">
-        <div class="station-number">
-          Station #1
+        <div class="col">
+          <section class="card">
+            <div class="station-number">
+              Station #1
+            </div>
+            <div class="station-name">
+              Name: Marksville
+            </div>
+            <div class="station-address">
+              Address: 1122 NE 100th Ave
+            </div>
+            <div class="station-state">
+              State: Oregon
+            </div>
+            <div class="station-city">
+              City: Portland
+            </div>
+            <div class="station-zipcode">
+              Zipcode: 97231
+            </div>
+          </section>
         </div>
-        <div class="station-name">
-          Name: Marksville
-        </div>
-        <div class="station-address">
-          Address: 1122 NE 100th Ave
-        </div>
-        <div class="station-state">
-          State: Oregon
-        </div>
-        <div class="station-city">
-          City: Portland
-        </div>
-        <div class="station-zipcode">
-          Zipcode: 97231
-        </div>
-      </section>
+        
+        <div class="col">
 
-      <section class="card">
-        <div class="station-number">
-          Station #2
+          <section class="card">
+            <div class="station-number">
+              Station #2
+            </div>
+            <div class="station-name">
+              Name: Malito
+            </div>
+            <div class="station-address">
+              Address: 0000 NE 50th Ave
+            </div>
+            <div class="station-state">
+              State: California
+            </div>
+            <div class="station-city">
+              City: Los Angeles
+            </div>
+            <div class="station-zipcode">
+              Zipcode: 77210
+            </div>
+          </section>
         </div>
-        <div class="station-name">
-          Name: Malito
+        
+        <div class="col">
+          <section class="card">
+            <div class="station-number">
+              Station #3
+            </div>
+            <div class="station-name">
+              Name: Apolis
+            </div>
+            <div class="station-address">
+              Address: 5566 NE 12th Ave
+            </div>
+            <div class="station-state">
+              State: Washington
+            </div>
+            <div class="station-city">
+              City: Seattle
+            </div>
+            <div class="station-zipcode">
+              Zipcode: 92311
+            </div>
+          </section>
         </div>
-        <div class="station-address">
-          Address: 0000 NE 50th Ave
-        </div>
-        <div class="station-state">
-          State: California
-        </div>
-        <div class="station-city">
-          City: Los Angeles
-        </div>
-        <div class="station-zipcode">
-          Zipcode: 77210
-        </div>
-      </section>
-
-      <section class="card">
-        <div class="station-number">
-          Station #3
-        </div>
-        <div class="station-name">
-          Name: Apolis
-        </div>
-        <div class="station-address">
-          Address: 5566 NE 12th Ave
-        </div>
-        <div class="station-state">
-          State: Washington
-        </div>
-        <div class="station-city">
-          City: Seattle
-        </div>
-        <div class="station-zipcode">
-          Zipcode: 92311
-        </div>
-      </section>
+      </div>
     </main>
 
     <form class="insert">

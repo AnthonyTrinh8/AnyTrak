@@ -18,12 +18,17 @@ function showmodal2() {
 
 /* Inserts Train into flex container */
 function inserttrain() {
+  event.preventDefault();
+
   /* Close Form */
   document.getElementsByClassName("insert")[0].classList.toggle("show");
 
   /* Making Train Insert Box */
-  var traininsert = document.createElement("section");
-  traininsert.classList.add("card");
+  var traininsert = document.createElement("div");
+  traininsert.classList.add("col");
+
+  var cardinsert = document.createElement("section");
+  cardinsert.classList.add("card");
 
 
   var train_number = document.createElement("div");
@@ -65,15 +70,19 @@ function inserttrain() {
   train_conductor.classList.add("train-conductor");
   train_conductor.appendChild(divText6);
 
-  traininsert.appendChild(train_number);
-  traininsert.appendChild(train_route);
-  traininsert.appendChild(train_model);
-  traininsert.appendChild(train_price);
-  traininsert.appendChild(train_capacity);
-  traininsert.appendChild(train_conductor);
+  cardinsert.appendChild(train_number);
+  cardinsert.appendChild(train_route);
+  cardinsert.appendChild(train_model);
+  cardinsert.appendChild(train_price);
+  cardinsert.appendChild(train_capacity);
+  cardinsert.appendChild(train_conductor);
+
+  traininsert.appendChild(cardinsert);
 
   /* Adding it into container */
-  document.getElementById("card-container").appendChild(traininsert);
+  document.getElementById("row").appendChild(traininsert);
+
+  document.getElementById("card-container").add("row");
 
   train_number_value = "";
   train_route_value = "";
@@ -95,11 +104,16 @@ function inserttrain() {
 function addstation(station_number_value, station_name_value, station_address_value,
                     station_state_value, station_city_value, station_zipcode_value) {
   /* Close Form */
+  event.preventDefault();
+
   document.getElementsByClassName("insert")[0].classList.toggle("show");
 
   /* Making Station Insert Box */
-  var stationinsert = document.createElement("section");
-  stationinsert.classList.add("card");
+  var stationinsert = document.createElement("div");
+  stationinsert.classList.add("col");
+
+  var cardinsert = document.createElement("section");
+  cardinsert.classList.add("card");
 
   var station_number = document.createElement("div");
   var divText1 = document.createTextNode("Station #" + station_number_value);
@@ -131,14 +145,19 @@ function addstation(station_number_value, station_name_value, station_address_va
   station_zipcode.classList.add("station-zipcode");
   station_zipcode.appendChild(divText6);
 
-  stationinsert.appendChild(station_number);
-  stationinsert.appendChild(station_name);
-  stationinsert.appendChild(station_address);
-  stationinsert.appendChild(station_state);
-  stationinsert.appendChild(station_city);
-  stationinsert.appendChild(station_zipcode);
+  cardinsert.appendChild(station_number);
+  cardinsert.appendChild(station_name);
+  cardinsert.appendChild(station_address);
+  cardinsert.appendChild(station_state);
+  cardinsert.appendChild(station_city);
+  cardinsert.appendChild(station_zipcode);
 
-  document.getElementById("card-container").appendChild(stationinsert);
+  stationinsert.appendChild(cardinsert);
+
+  document.getElementById("row").appendChild(stationinsert);
+
+
+  document.getElementById("card-container").add("row");
 }
 
 
@@ -206,3 +225,4 @@ function insertstation() {
              station_state_value, station_city_value, station_zipcode_value);
   document.getElementsByClassName("insert")[0].reset();
 }
+
