@@ -1,39 +1,44 @@
 
 <div class="title-header">
   <h4 class="title-name">Stations</h4>
-  <button onclick="showmodal()" class="addbutton">Add Stations</button>
-</div>
+      <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search by State...">
+      </div>
 
-<div id="search-container">
-  <input type="text" id="search-input" placeholder="Search by State...">
+  <div class="buttons">
+    <button onclick="showmodal()" class="butt">Add Stations</button>
+  </div>
 </div>
-
 
 <main id="card-container">
-
+  <div id ="row">
+    
   {{#each data}}
-  <section class="card">
-    <div class="station-number">
-      Station #{{this.stationID}}
-    </div>
-    <div class="station-name">
-      Name: {{this.stationname}}
-    </div>
-    <div class="station-address">
-      Address: {{this.address}}
-    </div>
-    <div class="station-state">
-      State: {{this.state}}
-    </div>
-    <div class="station-city">
-      City: {{this.city}}
-    </div>
-    <div class="station-zipcode">
-      Zipcode: {{this.zipcode}}
-    </div>
-  </section>
+  <div class="col">
+    <section class="card">
+      <div class="station-number">
+        Station #{{this.stationID}}
+      </div>
+      <div class="station-name">
+        Name: {{this.stationname}}
+      </div>
+      <div class="station-address">
+        Address: {{this.address}}
+      </div>
+      <div class="station-state">
+        State: {{this.state}}
+      </div>
+      <div class="station-city">
+        City: {{this.city}}
+      </div>
+      <div class="station-zipcode">
+        Zipcode: {{this.zipcode}}
+      </div>
+    </section>
+  </div>
   {{/each}}
 
+  </div>
 </main>
 
 <form class="insert">

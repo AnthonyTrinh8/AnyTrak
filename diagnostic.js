@@ -5,7 +5,12 @@ var path = require('path');
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-//app.use(express.static('public'));
+
+handlebars.handlebars.registerHelper('if_eq', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+
 app.use(express.static(path.join(__dirname, '/public')));
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -28,6 +33,25 @@ app.get('/trains',function(req, res, next){
   var context = {};
   mysql.pool.query('SELECT * FROM trains', function(error, results, fields){
     res.render('trains', {data: results});
+  });
+});
+
+app.get('/routes', function(req, res, next) {
+  var context = {};
+  mysql.pool.query('SELECT * FROM routes', function(error, results, fields) {
+    if (error) {
+      return next(err);
+    } else {
+      var context1 = results;
+      mysql.pool.query('SELECT * FROM routesthrustations', function(error, results, fields) {
+        if (error) {
+          return next(err);
+        } else {
+          var context2 = results;
+          res.render('routes', {data1: context1 , data2: context2});
+        }
+      });
+    }
   });
 });
 

@@ -1,0 +1,101 @@
+    <div class="title-header">
+      <h4 class="title-name">Routes</h4>
+      <div class="buttons">
+        <button onclick="showmodal()" class="butt">Add Routes</button>
+      </div>
+    </div>
+
+    <main id="card-container">
+    <div class="row">
+
+      {{#each data1}}
+        <div class="col">
+          <section class="card">
+            <span class="close">x</span>
+            <div class="route-number">
+              Route #{{this.routeID}}
+            </div>
+            <div class="route-name">
+              Route: {{this.routename}}
+            </div>
+            <div class="train-number">
+              Train # on this route: {{this.trainID}}
+            </div>
+
+
+            <div class="stationname">
+              Stations:
+            </div>
+            <div id="card-container" class="stationsize">
+
+            {{#each ../data2}}
+
+              {{#if_eq ../routeID this.routeID}}
+              <div class="route-card noborder">
+                <h2>Current-Station #: {{this.stationID}}</h2>
+                <h1>Travel Time: {{this.travelduration}}</h1>
+                <h1>Miles Traveled: {{this.milestraveled}}</h1>
+              </div>
+              {{/if_eq}}
+            {{/each}}
+
+            </div>
+
+
+
+          </section>
+        </div>
+      {{/each}}
+
+    </div>
+    </main>
+
+    <form class="insert">
+      <div class="middle">
+        <h3>Insert Route</h3>
+      </div>
+      <div class="input-box">
+        <label>Route Name</label>
+        <input type="text" id="route-name">
+      </div>
+      <button onclick="insertroute(); return false;" class="button" id="submit-route">Submit</button>
+    </form>
+
+    <form class="insert">
+      <div class="middle">
+        <h3>Add Stations to Route</h3>
+      </div>
+      <div class="input-box">
+        <label>Select Route To Add Stations To</label>
+        <select name="route">
+          <option value="1">Route 1</option>
+          <option value="2">Route 2</option>
+          <option value="3">Route 3</option>
+          <option value="4">Route 4</option>
+        </select>
+      </div>
+      <div class="input-box">
+        <label>Select From Available Station</label>
+        <select name="station">
+          <option value="1">Station 1</option>
+          <option value="2">Station 2</option>
+          <option value="3">Station 3</option>
+          <option value="4">Station 4</option>
+        </select>
+      </div>
+      <button onclick="insertstationroute(); return false;" class="button" id="submit-station-route">Submit</button>
+    </form>
+
+
+    <script>
+      var closebtns = document.getElementsByClassName("close");
+      var i;
+
+      for (i = 0; i < closebtns.length; i++) {
+        closebtns[i].addEventListener("click", function () {
+          this.parentElement.style.display = 'none';
+        });
+      }
+    </script>
+  </body>
+</html>

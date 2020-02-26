@@ -1,32 +1,39 @@
 <div class="title-header">
   <h4 class="title-name">Trains</h4>
-  <button onclick="showmodal()" class="addbutton">Add/Update Trains</button>
+  <div class="buttons">
+    <button onclick="showmodal()" class="butt">Add a Train</button>
+    <button onclick="showmodal2()" class="butt">Update a Train</button>
+  </div>
 </div>
 
+
 <main id="card-container">
+  <div id="row">
 
   {{#each data}}
-    <section class="card">
-      <div class="train-number">
-        Train {{this.trainID}}
-      </div>
-      <div class="train-conductor">
-        Conductor: {{this.conductor}}
-      </div>
-      <div class="train-model">
-        Model: {{this.model}}
-      </div>
-      <div class="train-price">
-        Price: {{this.cost}}
-      </div>
-      <div class="train-capacity">
-        Capacity: {{this.capacity}}
-      </div>
-    </section>
+    <div class="col">
+      <section class="card">
+        <div class="train-number">
+          Train {{this.trainID}}
+        </div>
+        <div class="train-conductor">
+          Conductor: {{this.conductorfirstname}} + {{this.conductorlastname}}
+        </div>
+        <div class="train-model">
+          Model: {{this.model}}
+        </div>
+        <div class="train-price">
+          Price: {{this.cost}}
+        </div>
+        <div class="train-capacity">
+          Capacity: {{this.capacity}}
+        </div>
+      </section>
+    <div>
   {{/each}}
 
 
-
+  </div>
 </main>
 
 <form class="insert">
