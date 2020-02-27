@@ -102,7 +102,7 @@ function inserttrain() {
 /* Sub-function for adding stations so we can easily create station boxes of any values
    rather than just from user input in forms */
 function addstation(station_number_value, station_name_value, station_address_value,
-                    station_state_value, station_city_value, station_zipcode_value) {
+  station_state_value, station_city_value, station_zipcode_value) {
   /* Close Form */
   event.preventDefault();
 
@@ -163,7 +163,7 @@ function addstation(station_number_value, station_name_value, station_address_va
 
 /* Adds stations but with only the variable names, not a template such as "Name: " + value */
 function addstationonly(station_number_value, station_name_value, station_address_value,
-                    station_state_value, station_city_value, station_zipcode_value) {
+  station_state_value, station_city_value, station_zipcode_value) {
   /* Close Form */
   document.getElementsByClassName("insert")[0].classList.toggle("show");
 
@@ -222,7 +222,7 @@ function insertstation() {
   var station_city_value = document.getElementById("station-city").value;
   var station_zipcode_value = document.getElementById("station-zipcode").value;
   addstation(station_number_value, station_name_value, station_address_value,
-             station_state_value, station_city_value, station_zipcode_value);
+    station_state_value, station_city_value, station_zipcode_value);
   document.getElementsByClassName("insert")[0].reset();
 }
 

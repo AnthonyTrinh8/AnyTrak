@@ -1,3 +1,6 @@
+<script src="/index.js"></script>
+
+
 <div class="title-header">
   <h4 class="title-name">Trains</h4>
   <div class="buttons">
@@ -6,11 +9,10 @@
   </div>
 </div>
 
-
 <main id="card-container">
   <div id="row">
 
-  {{#each data}}
+    {{#each data}}
     <div class="col">
       <section class="card">
         <div class="train-number">
@@ -29,9 +31,8 @@
           Capacity: {{this.capacity}}
         </div>
       </section>
-    <div>
-  {{/each}}
-
+      </div>
+      {{/each}}
 
   </div>
 </main>
@@ -67,11 +68,11 @@
   <button onclick="inserttrain(); return false;" class="button" id="submit-train">Submit</button>
 </form>
 
-<form class="insert">
+<form class="update">
   <div class="middle">
     <h3>Update Train</h3>
   </div>
-  <div class="input-box">
+  <div class="update-box">
     <label>Train #</label>
     <select name="train">
       <option value="1">Train 1</option>
@@ -80,29 +81,25 @@
       <option value="4">Train 4</option>
     </select>
   </div>
-  <div class="input-box">
+  <div class="update-box">
     <label>Assigned Route</label>
     <input type="text" id="train-route">
   </div>
-  <div class="input-box">
+  <div class="update-box">
     <label>Model</label>
     <input type="text" id="train-model">
   </div>
-  <div class="input-box">
+  <div class="update-box">
     <label>Price</label>
     <input type="text" id="train-price">
   </div>
-  <div class="input-box">
+  <div class="update-box">
     <label>Capacity</label>
     <input type="text" id="train-capacity">
   </div>
-  <div class="input-box">
-    <label>Conductor's First Name</label>
-    <input type="text" id="train-conductor-first">
+  <div class="update-box">
+    <label>Conductor</label>
+    <input type="text" id="train-conductor">
   </div>
-  <div class="input-box">
-    <label>Conductor's Last Name</label>
-    <input type="text" id="train-conductor-last"
-  </div
   <button onclick="" class="button" id="submit-update-train">Submit</button>
 </form>
