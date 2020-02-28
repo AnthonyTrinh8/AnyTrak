@@ -225,4 +225,3 @@ function insertstation() {
     station_state_value, station_city_value, station_zipcode_value);
   document.getElementsByClassName("insert")[0].reset();
 }
-
