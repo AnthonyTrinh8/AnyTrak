@@ -12,7 +12,7 @@
 
 <main id="card-container">
   <div id ="row">
-    
+
   {{#each data}}
   <div class="col">
     <section class="card">
@@ -63,7 +63,7 @@
   </div>
   <div class="input-box">
     <label>Zipcode</label>
-    <input type="text" id="station-zipcode">
+    <input type="number" step="1" id="station-zipcode">
   </div>
-  <button onclick="insertstation(); return false;" class="button" id="submit-station">Submit</button>
+  <button onclick="insertstation();" class="button" id="submit-station">Submit</button>
 </form>

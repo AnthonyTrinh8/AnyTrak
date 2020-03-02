@@ -42,31 +42,38 @@
     <h3>Insert Train</h3>
   </div>
   <div class="input-box">
-    <label>Train #</label>
-    <input type="text" id="train-number">
-  </div>
-  <div class="input-box">
-    <label>Assigned Route</label>
-    <input type="text" id="train-route">
+    <label>Main Station</label>
+    <select id="main-station">
+      <option value="">None</option>
+      {{#each data1}}
+      <option value={{this.stationID}}>{{this.stationname}}</option>
+      {{/each}}
+    </select>
   </div>
   <div class="input-box">
     <label>Model</label>
     <input type="text" id="train-model">
   </div>
   <div class="input-box">
-    <label>Price</label>
-    <input type="text" id="train-price">
+    <label>Cost</label>
+    <input type="number" min="1" step="1" id="train-cost">
   </div>
   <div class="input-box">
     <label>Capacity</label>
-    <input type="text" id="train-capacity">
+    <input type="number" min="1" step="1" id="train-capacity">
   </div>
   <div class="input-box">
-    <label>Conductor</label>
-    <input type="text" id="train-conductor">
+    <label>Conductor's First Name</label>
+    <input type="text" id="train-first-conductor">
   </div>
-  <button onclick="inserttrain(); return false;" class="button" id="submit-train">Submit</button>
+  <div class="input-box">
+    <label>Conductor's Last Name</label>
+    <input type="text" id="train-last-conductor">
+  </div>
+  <button onclick="inserttrain();" class="button" id="submit-train">Submit</button>
 </form>
+
+
 
 <form class="update">
   <div class="middle">
@@ -83,23 +90,23 @@
   </div>
   <div class="update-box">
     <label>Assigned Route</label>
-    <input type="text" id="train-route">
+    <input type="text" id="train-route-update">
   </div>
   <div class="update-box">
     <label>Model</label>
-    <input type="text" id="train-model">
+    <input type="text" id="train-model-update">
   </div>
   <div class="update-box">
     <label>Price</label>
-    <input type="text" id="train-price">
+    <input type="text" id="train-price-update">
   </div>
   <div class="update-box">
     <label>Capacity</label>
-    <input type="text" id="train-capacity">
+    <input type="text" id="train-capacity-update">
   </div>
   <div class="update-box">
     <label>Conductor</label>
-    <input type="text" id="train-conductor">
+    <input type="text" id="train-conductor-update">
   </div>
   <button onclick="" class="button" id="submit-update-train">Submit</button>
 </form>
