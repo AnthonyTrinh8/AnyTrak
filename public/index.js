@@ -1,3 +1,11 @@
+var closebtns = document.getElementsByClassName("close");
+
+for (var i = 0; i < closebtns.length; i++) {
+  closebtns[i].addEventListener("click", function () {
+    this.parentElement.style.display = 'none';
+  });
+}
+
 /* Button that pops up form to add element for each entity */
 function showmodal() {
   var allboxes = document.getElementsByClassName("insert");
@@ -14,6 +22,26 @@ function showmodal2() {
   for (i = 0; i < allboxes.length; i++) {
     allboxes[i].classList.toggle("show");
   }
+}
+
+
+function searchfunction() {
+  alert("Clicked!");
+  var filterinput = document.getElementById("search-input").value.trim();
+  console.log(filterinput);
+  var request = new XMLHttpRequest();
+  request.open('POST', "/stations/search");
+
+  var input = {
+    filter: filterinput
+  };
+
+  var requestBody = JSON.stringify(input);
+
+  console.log("Sent Request");
+
+  request.setRequestHeader('Content-type', 'application/json');
+  request.send(requestBody);
 }
 
 
@@ -245,6 +273,9 @@ function insertstation() {
   }
   document.getElementsByClassName("insert")[0].reset();
 }
+
+
+
 
 
 function inserttrain() {

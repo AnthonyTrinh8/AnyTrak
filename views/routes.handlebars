@@ -56,7 +56,20 @@
         <label>Route Name</label>
         <input type="text" id="route-name">
       </div>
-      <button onclick="insertroute(); return false;" class="button" id="submit-route">Submit</button>
+      <div class="input-box">
+        <label>Train on this route</label>
+        <select id="train-on-route">
+          <option value="">None</option>
+          {{#each data3}}
+          <option value={{this.trainID}}>{{this.trainID}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="input-box">
+        <label>Ticket Price</label>
+        <input type="number" min="1" step="1" id="ticket-price">
+      </div>
+      <button onclick="insertroute();" class="button" id="submit-route">Submit</button>
     </form>
 
     <form class="insert">
@@ -84,16 +97,5 @@
       <button onclick="insertstationroute(); return false;" class="button" id="submit-station-route">Submit</button>
     </form>
 
-
-    <script>
-      var closebtns = document.getElementsByClassName("close");
-      var i;
-
-      for (i = 0; i < closebtns.length; i++) {
-        closebtns[i].addEventListener("click", function () {
-          this.parentElement.style.display = 'none';
-        });
-      }
-    </script>
   </body>
 </html>

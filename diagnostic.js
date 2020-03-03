@@ -34,6 +34,21 @@ app.get('/stations', function(req, res, next) {
   });
 });
 
+app.post('/stations/search', function(req, res, next) {
+  console.log("Received");
+  var query = "SELECT * FROM stations WHERE state=?";
+  var filter = req.body.filter;
+  mysql.pool.query(query, [filter], function(error, results, fields) {
+    if (error) {
+      return next(error);
+    } else {
+      res.render('stations', {data: results});
+      res.status(200).send("Search successfull");
+    }
+  });
+});
+
+
 //Renders Trains page
 app.get('/trains',function(req, res, next){
   var context = {};
@@ -67,7 +82,14 @@ app.get('/routes', function(req, res, next) {
           return next(err);
         } else {
           var context2 = results;
-          res.render('routes', {data1: context1 , data2: context2});
+          mysql.pool.query('SELECT trainID FROM trains', function (error, results, fields) {
+            if (error) {
+              return next(error);
+            } else {
+              var context3= results;
+              res.render('routes', {data1: context1, data2: context2, data3: context3});
+            }
+          });
         }
       });
     }
@@ -124,6 +146,9 @@ app.post('/trains/create', function (req, res, next) {
     res.status(400).send({ error: "All input fields must be filled."})
   }
 });
+
+
+
 
 
 app.use(function(req,res){
