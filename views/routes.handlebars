@@ -8,7 +8,7 @@
     <main id="card-container">
     <div class="row">
 
-      {{#each data1}}
+      {{#each routes}}
         <div class="col">
           <section class="card">
             <span class="close">x</span>
@@ -29,7 +29,7 @@
             </div>
             <div class="route-card">
 
-            {{#each ../data2}}
+            {{#each ../routesthrustations}}
               {{#if_eq ../routeID this.routeID}}
                 <text>Current-Station #: {{this.stationID}} </text><br>
                 <text>Travel Time: {{this.travelduration}}</text><br>
@@ -60,8 +60,8 @@
         <label>Train on this route</label>
         <select id="train-on-route">
           <option value="">None</option>
-          {{#each data3}}
-          <option value={{this.trainID}}>{{this.trainID}}</option>
+          {{#each trains}}
+          <option value={{this.trainID}}>Train {{this.trainID}}</option>
           {{/each}}
         </select>
       </div>
@@ -78,23 +78,29 @@
       </div>
       <div class="input-box">
         <label>Select Route To Add Stations To</label>
-        <select name="route">
-          <option value="1">Route 1</option>
-          <option value="2">Route 2</option>
-          <option value="3">Route 3</option>
-          <option value="4">Route 4</option>
+        <select name="route" id="add-route">
+          {{#each routes}}
+          <option value={{this.routeID}}>Route {{this.routeID}}</option>
+          {{/each}}
         </select>
       </div>
       <div class="input-box">
         <label>Select From Available Station</label>
-        <select name="station">
-          <option value="1">Station 1</option>
-          <option value="2">Station 2</option>
-          <option value="3">Station 3</option>
-          <option value="4">Station 4</option>
+        <select name="station" id="add-station">
+          {{#each stations}}
+          <option value={{this.stationID}}>Station {{this.stationID}}</option>
+          {{/each}}
         </select>
       </div>
-      <button onclick="insertstationroute(); return false;" class="button" id="submit-station-route">Submit</button>
+      <div class="input-box">
+        <label>Travel Duration (min)</label>
+        <input type="number" min="0" step"1" id="travel-duration">
+      </div>
+        <label>Miles Traveled (min)</labe>
+        <input type="number" min="0" step="1" id="miles-traveled">
+      <div class="input-box">
+      </div>
+      <button onclick="insertstationroute();" class="button" id="submit-station-route">Submit</button>
     </form>
 
   </body>

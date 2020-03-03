@@ -343,3 +343,36 @@ function insertroute() {
     alert("Please submit all fields");
   }
 }
+
+
+function insertstationroute() {
+  var add_route_input = document.getElementById('add-route').value.trim();
+  var add_station_input = document.getElementById('add-station').value.trim();
+  var travel_duration_input = document.getElementById('travel-duration').value.trim();
+  var miles_traveled_input = document.getElementById('miles-traveled').value.trim();
+  if (add_route_input && add_station_input) {
+    var request = new XMLHttpRequest();
+    request.open('POST', "/routesthrustations/create");
+    var routesthrustations = {
+      route: add_route_input,
+      station: add_station_input,
+      travel_duration: travel_duration_input,
+      miles_traveled: miles_traveled_input
+    };
+    var requestBody = JSON.stringify(routesthrustations);
+
+    request.addEventListener('load', function (event) {
+      if (event.target.status === 400) {
+        alert("The station being added to the route must be unique");
+      }
+    });
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(requestBody);
+    document.getElementsByClassName("insert")[0].reset();
+    document.getElementsByClassName("insert")[1].reset();
+  } else {
+    alert("Please fill out at least the route # and station #");
+  }
+
+
+}

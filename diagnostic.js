@@ -79,15 +79,22 @@ app.get('/routes', function(req, res, next) {
       var context1 = results;
       mysql.pool.query('SELECT * FROM routesthrustations', function(error, results, fields) {
         if (error) {
-          return next(err);
+          return next(error);
         } else {
           var context2 = results;
           mysql.pool.query('SELECT trainID FROM trains ORDER BY trainID', function (error, results, fields) {
             if (error) {
               return next(error);
             } else {
-              var context3= results;
-              res.render('routes', {data1: context1, data2: context2, data3: context3});
+              var context3 = results;
+              mysql.pool.query('SELECT * FROM stations ORDER BY stationID', function(error, results, fields) {
+                if (error) {
+                  return next(error);
+                } else {
+                  var context4 = results;
+                  res.render('routes', {routes: context1, routesthrustations: context2, trains: context3, stations: context4});
+                }
+              });
             }
           });
         }
@@ -158,7 +165,7 @@ app.post('/routes/create', function(req, res, next) {
       if (error) {
         return next(error);
       } else {
-        res.status(200).send("Successfuly added route to database.");
+        res.status(200).send("Successfully added route to database.");
       }
 
 
@@ -166,11 +173,26 @@ app.post('/routes/create', function(req, res, next) {
   } else {
     res.status(400).send( { error: "All input fields must be filled."});
   }
-
-
-
 });
 
+app.post('/routesthrustations/create', function(req, res, next) {
+  if(req.body && req.body.route && req.body.station) {
+        var route = req.body.route;
+        var station = req.body.station;
+        var travel_duration = req.body.travel_duration;
+        var miles_traveled = req.body.miles_traveled;
+        var query = "INSERT INTO routesthrustations (routeID, stationID, travelduration, milestraveled) VALUES (?,?,?,?)";
+        mysql.pool.query(query, [route, station, travel_duration, miles_traveled], function (error, results, fields) {
+          if (error) {
+            return next(error);
+          } else {
+            res.status(200).send("Successfully added stations to routesthrustations in database");
+          }
+        });
+  } else {
+    res.status(400).send( { error: "Input fields for routes and stations must be filled."});
+  }
+});
 
 
 
