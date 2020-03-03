@@ -82,7 +82,7 @@ app.get('/routes', function(req, res, next) {
           return next(err);
         } else {
           var context2 = results;
-          mysql.pool.query('SELECT trainID FROM trains', function (error, results, fields) {
+          mysql.pool.query('SELECT trainID FROM trains ORDER BY trainID', function (error, results, fields) {
             if (error) {
               return next(error);
             } else {
@@ -133,7 +133,7 @@ app.post('/trains/create', function (req, res, next) {
         var train_first = req.body.train_first_input;
         var train_last = req.body.train_last_input;
         console.log(req.body);
-        var query = "INSERT INTO trains (stationID, model, cost, capacity, conductorfirstname, conductorlastname) VALUES (?,?,?,?,?,?)"
+        var query = "INSERT INTO trains (stationID, model, cost, capacity, conductorfirstname, conductorlastname) VALUES (?,?,?,?,?,?)";
         mysql.pool.query(query, [station_id, train_model, train_cost, train_capacity, train_first, train_last], function (error, results, fields) {
           if (error) {
             return next(error);
@@ -147,6 +147,29 @@ app.post('/trains/create', function (req, res, next) {
   }
 });
 
+app.post('/routes/create', function(req, res, next) {
+  if (req.body && req.body.route_name && req.body.train_on_route && req.body.ticket_price) {
+    console.log(req.body);
+    var route_name = req.body.route_name;
+    var train_on_route = req.body.train_on_route;
+    var ticket_price = req.body.ticket_price
+    var query = "INSERT INTO routes (trainID, routename, ticketprice) VALUES (?,?,?)";
+    mysql.pool.query(query,[train_on_route, route_name, ticket_price], function (error, results, fields) {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).send("Successfuly added route to database.");
+      }
+
+
+    });
+  } else {
+    res.status(400).send( { error: "All input fields must be filled."});
+  }
+
+
+
+});
 
 
 

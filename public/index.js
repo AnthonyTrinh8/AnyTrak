@@ -314,3 +314,32 @@ function inserttrain() {
   }
   document.getElementsByClassName("insert")[0].reset();
 }
+
+
+function insertroute() {
+  var route_name_input = document.getElementById("route-name").value.trim();
+  var train_on_route_input = document.getElementById('train-on-route').value.trim();
+  var ticket_price_input = document.getElementById('ticket-price').value.trim();
+  if (route_name_input && train_on_route_input && ticket_price_input) {
+    var request = new XMLHttpRequest();
+    request.open('POST', "/routes/create");
+    var route = {
+      route_name: route_name_input,
+      train_on_route: train_on_route_input,
+      ticket_price: ticket_price_input
+    };
+    var requestBody = JSON.stringify(route);
+
+    request.addEventListener('load', function (event) {
+      if (event.target.status === 400) {
+        alert("The Route must be unique");
+      }
+    });
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(requestBody);
+    document.getElementsByClassName("insert")[0].reset();
+    document.getElementsByClassName("insert")[1].reset();
+  } else {
+    alert("Please submit all fields");
+  }
+}
