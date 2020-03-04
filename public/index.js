@@ -1,9 +1,17 @@
+
+
 var closebtns = document.getElementsByClassName("close");
 
 for (var i = 0; i < closebtns.length; i++) {
   closebtns[i].addEventListener("click", function () {
     this.parentElement.style.display = 'none';
   });
+}
+
+function showsearch() {
+  var allboxes = document.getElementById("search-container");
+  console.log(allboxes.style.display);
+  allboxes.style.display = "block";
 }
 
 /* Button that pops up form to add element for each entity */
@@ -24,8 +32,36 @@ function showmodal2() {
   }
 }
 
+var saveCards = document.getElementsByClassName("card");
+var saveStates = document.getElementsByClassName("station-state");
 
 function searchfunction() {
+  // var cardState;
+  // var filterinput = document.getElementById("search-input").value.trim();
+  // var allCardStates = saveStates;
+  // var allCards = document.getElementsByClassName("card");
+  // var allCards = saveCards;
+
+  // for(i = 0; i < allCardStates.length; i++){
+  //   // console.log(allCards);
+  //   cardState = allCardStates[i].innerText.split(" ");
+  //   if (filterinput == "") {
+  //     return;
+  //   }
+  //   for(j = 0; j < cardState.length; j++){
+  //     show(allCards[i]);
+  //     // console.log(filterinput);
+  //     // console.log(cardState[j]);
+  //     // console.log("-----------");
+  //     if (cardState[j] != filterinput) {
+  //       if (window.getComputedStyle(allCards[i]).display === 'block') {
+  //         hide(allCards[i]);
+  //       }
+  //     }
+      
+  //   }
+  // } 
+
   alert("Clicked!");
   var filterinput = document.getElementById("search-input").value.trim();
   console.log(filterinput);
@@ -42,6 +78,29 @@ function searchfunction() {
 
   request.setRequestHeader('Content-type', 'application/json');
   request.send(requestBody);
+  console.log(request);
+}
+
+// Show an element
+var show = function (elem) {
+  elem.style.display = 'block';
+};
+
+// Hide an element
+var hide = function (elem) {
+  elem.style.display = 'none';
+};
+
+function RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
 }
 
 

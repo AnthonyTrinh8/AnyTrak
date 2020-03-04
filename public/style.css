@@ -112,9 +112,6 @@ float: right;
 
 /* Dimensions for search in stations */
 #search-container {
-  /* flex: 1;
-  background-color: white; */
-
   float: right;
   padding: 0px;
   margin-left: -380px;
@@ -122,6 +119,7 @@ float: right;
   margin-top: 0px;
   margin-right: 16px;
   font-size: 17px;
+  /* display: none; */
 }
 
 /* Search input */
