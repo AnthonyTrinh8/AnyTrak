@@ -1,38 +1,54 @@
 var express = require('express');
 var mysql = require('./dbcon.js');
-var path = require('path');
 var bodyParser = require('body-parser');
-
 
 var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-var bodyParser = require('body-parser');
-
-
-handlebars.handlebars.registerHelper('if_eq', function(arg1, arg2, options) {
-    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+var handlebars = require('express-handlebars').create({
+  defaultLayout: 'main',
 });
 
-
-app.use(express.static(path.join(__dirname, '/public')));
 app.engine('handlebars', handlebars.engine);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use('/', express.static('public')); 
 app.set('view engine', 'handlebars');
-// app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.set('port', process.argv[2]);
+app.set('mysql', mysql);
+app.use('/trains', require('./index.js'));
+app.use('/stations', require('./index.js'));
+app.use('/routes', require('./index.js'));
 
 
-//Renders Home page
-app.get('/',function(req,res,next){
-  var context = {};
-  mysql.pool.query('SELECT * FROM trains', function(error, results, fields){
-    res.render('home');
-  });
-});
+// var express = require('express');
 
+// var app = express();
+// var router = express.Router();
 
+// var handlebars = require('express-handlebars').create({ defaultLayout: 'main' });
+// var bodyParser = require('body-parser');
+// var mysql = require('./dbcon.js');
+// // var path = require('path');
+
+// // app.use(express.static(path.join(__dirname, '/public')));
+// // app.use(express.static('public'));
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use('/stations', require('./index.js'));
+// app.use('/trains', require('./index.js'));
+// app.use('/routes', require('./index.js'));
+// app.use('/', express.static('public'));
+// // app.use(bodyParser.json());
+// app.engine('handlebars', handlebars.engine);
+// app.set('mysql', mysql);
+// app.set('view engine', 'handlebars');
+// app.set('port', process.argv[2]); 
+
+// // handlebars.handlebars.registerHelper('if_eq', function(arg1, arg2, options) {
+// //     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+// // });
+
+//get all station attributes to render the stations page properly
 function getStation(res, mysql, context, complete) {
-  mysql.pool.query("SELECT stationname, address, state, city, zipcode FROM stations WHERE state = ?", function (error, result, fields) {
+  mysql.pool.query("SELECT stationname, address, state, city, zipcode FROM stations", function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
@@ -42,13 +58,13 @@ function getStation(res, mysql, context, complete) {
     complete();
   });
 }
-
-function getStationsbyState(req, res, mysql, context, complete){
+//get the station that corresponds to the stationID the user requested.
+function getStationsbyState(req, res, mysql, context, complete) {
   var query = "SELECT stationname, address, state, city, zipcode FROM stations WHERE state = ?";
   var filter = [req.params.stationID];
   console.log(filter);
-  mysql.pool.query(query, filter, function(error, results, fields){
-    if(error){
+  mysql.pool.query(query, filter, function (error, results, fields) {
+    if (error) {
       res.write(JSON.stringify(error));
       res.end();
     }
@@ -57,23 +73,13 @@ function getStationsbyState(req, res, mysql, context, complete){
   });
 }
 
-app.get('/stations/search/:stationID', function(req, res){
-  var callbackCount = 0;
+//Renders Home page
+app.get('/home', function(req,res,next){
   var context = {};
-  var mysql = req.app.get('mysql');
-  getStationsbyState(req, res, mysql, context, complete);
-  getStation(res, mysql, context, complete);
-  function complete(){
-    callbackCount++;
-    if(callbackCount >= 2){
-      res.render('stations', context);
-      // res.status(200).send("success");
-      return;
-    }
-  }
+  res.render('home', context);
 });
 
-//Renders Stations page
+//Renders Stations page with all the stations and their attributes.
 app.get('/stations', function (req, res) {
   var callbackCount = 0;
   var context = {};
@@ -84,12 +90,33 @@ app.get('/stations', function (req, res) {
     if (callbackCount >= 1) {
       res.render('stations', context);
       res.status(200).send("success");
+      console.log(res);
     }
   }
   // mysql.pool.query('SELECT * FROM stations', function(error, results, fields){
   //   res.render('stations', {data: results});
   // });
 });
+
+//display the filtered stations. The extantion to the URL is /stations/search/:stationID
+app.get('/stations/search/:stationID', function(req, res){
+  var callbackCount = 0;
+  var context = {};
+  var mysql = req.app.get('mysql');
+  getStationsbyState(req, res, mysql, context, complete);
+  // getStation(res, mysql, context, complete);
+  res.send("ENTERED");
+  function complete(){
+    callbackCount++;
+    if(callbackCount >= 1){
+      res.render('stations', context);
+      // res.status(200).send("success");
+      // return;
+    }
+  }
+});
+
+
 
 // app.get('/stations/search', function(req, res, next) {
 //   var query = "SELECT * FROM stations WHERE state=?";
@@ -250,7 +277,6 @@ app.post('/routesthrustations/create', function(req, res, next) {
     res.status(400).send( { error: "Input fields for routes and stations must be filled."});
   }
 });
-
 
 
 app.use(function(req,res){
