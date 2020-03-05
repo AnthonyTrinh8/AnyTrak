@@ -1,11 +1,21 @@
 
 <div class="title-header">
   <h4 class="title-name">Stations</h4>
-      <div id="search-container" >
+      {{!-- <div id="search-container" >
         <input type="text" id="search-input" placeholder="Search by State...">
         <button type="button" onclick="searchfunction(); return false;" class = "search-butt"> Search </button>
 
-      </div>
+      </div> --}}
+      <form id='search-container' action='' method=''>
+        <!--- this form does not submit directly, the button handles all the interaction with backend -->
+        <label> Find Station </label>
+        <select id='station_filter' name="station">
+          {{#each data}}
+          <option value="{{stationID}}">{{state}}</option>
+          {{/each}}
+        </select><br>
+        <input type="button" value="Filter" onclick="searchfunction(); return false;">
+      </form>
 
   <div class="buttons">
     <button onclick="showmodal();" class="butt">Add Stations</button>

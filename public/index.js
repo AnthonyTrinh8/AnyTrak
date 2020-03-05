@@ -35,73 +35,33 @@ function showmodal2() {
 var saveCards = document.getElementsByClassName("card");
 var saveStates = document.getElementsByClassName("station-state");
 
-function searchfunction() {
-  // var cardState;
-  // var filterinput = document.getElementById("search-input").value.trim();
-  // var allCardStates = saveStates;
-  // var allCards = document.getElementsByClassName("card");
-  // var allCards = saveCards;
-
-  // for(i = 0; i < allCardStates.length; i++){
-  //   // console.log(allCards);
-  //   cardState = allCardStates[i].innerText.split(" ");
-  //   if (filterinput == "") {
-  //     return;
-  //   }
-  //   for(j = 0; j < cardState.length; j++){
-  //     show(allCards[i]);
-  //     // console.log(filterinput);
-  //     // console.log(cardState[j]);
-  //     // console.log("-----------");
-  //     if (cardState[j] != filterinput) {
-  //       if (window.getComputedStyle(allCards[i]).display === 'block') {
-  //         hide(allCards[i]);
-  //       }
-  //     }
-      
-  //   }
-  // } 
-
-  alert("Clicked!");
-  var filterinput = document.getElementById("search-input").value.trim();
-  console.log(filterinput);
-  var request = new XMLHttpRequest();
-  request.open('POST', "/stations/search");
-
-  var input = {
-    filter: filterinput
-  };
-
-  var requestBody = JSON.stringify(input);
-
-  console.log("Sent Request");
-
-  request.setRequestHeader('Content-type', 'application/json');
-  request.send(requestBody);
-  console.log(request);
+function searchfunction(){
+  var stationID = document.getElementById("station_filter").value;
+  //construct the URL and redirect to it
+  window.location = '/stations/search/' + parseInt(stationID);
 }
 
-// Show an element
-var show = function (elem) {
-  elem.style.display = 'block';
-};
+// function searchfunction() {
+//   // alert("Clicked!");
+//   var filterinput = document.getElementById("search-input").value.trim();
+//   // console.log(filterinput);
+//   var request = new XMLHttpRequest();
+//   request.open('GET', "/stations/search"); 
 
-// Hide an element
-var hide = function (elem) {
-  elem.style.display = 'none';
-};
+//   var input = {
+//     filter: filterinput
+//   };
 
-function RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
-    }
-  }
-  element.className = arr1.join(" ");
-}
+//   var requestBody = JSON.stringify(input);
+
+//   console.log("Sent Request");
+
+//   request.setRequestHeader('Content-type', 'application/json');
+//   request.send(requestBody);
+//   console.log(request);
+
+// }
+
 
 
 // /* Inserts Train into flex container */
