@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var bodyParser = require('body-parser');
-var mysql = require('./dbcon.js');
 
 
 handlebars.handlebars.registerHelper('if_eq', function(arg1, arg2, options) {
@@ -32,7 +31,6 @@ app.get('/',function(req,res,next){
 });
 
 
-
 function getStation(res, mysql, context, complete) {
   mysql.pool.query("SELECT stationname, address, state, city, zipcode FROM stations WHERE state = ?", function (error, result, fields) {
     if (error) {
@@ -40,7 +38,7 @@ function getStation(res, mysql, context, complete) {
       res.end();
     }
     context.data = result;
-    // console.log(result);
+    console.log(result);
     complete();
   });
 }
@@ -63,7 +61,6 @@ app.get('/stations/search/:stationID', function(req, res){
   var callbackCount = 0;
   var context = {};
   var mysql = req.app.get('mysql');
-  context.jsscripts = ["public/index.js"];
   getStationsbyState(req, res, mysql, context, complete);
   getStation(res, mysql, context, complete);
   function complete(){
