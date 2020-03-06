@@ -8,12 +8,6 @@ for (var i = 0; i < closebtns.length; i++) {
   });
 }
 
-function showsearch() {
-  var allboxes = document.getElementById("search-container");
-  console.log(allboxes.style.display);
-  allboxes.style.display = "block";
-}
-
 /* Button that pops up form to add element for each entity */
 function showmodal() {
   var allboxes = document.getElementsByClassName("insert");
@@ -37,8 +31,9 @@ var saveStates = document.getElementsByClassName("station-state");
 
 function searchfunction() {
   var stationID = document.getElementById("station_filter").value;
+  console.log(stationID);
   //construct the URL and redirect to it
-  window.location = '/stations/search/' + parseInt(stationID);
+  window.location = '/stations/filter/' + parseInt(stationID)
 }
 
 // function searchfunction() {

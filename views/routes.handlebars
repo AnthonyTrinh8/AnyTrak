@@ -8,7 +8,7 @@
     <main id="card-container">
     <div class="row">
 
-      {{#each data1}}
+      {{#each route_data}}
         <div class="col">
           <section class="card">
             <span class="close">x</span>
@@ -29,12 +29,12 @@
             </div>
             <div class="route-card">
 
-            {{#each ../data2}}
-              {{#if_eq ../routeID this.routeID}}
+            {{#each ../route_details}}
+              {{!-- {{#if_eq routeID this.routeID}}--}}
                 <text>Current-Station #: {{this.stationID}} </text><br>
                 <text>Travel Time: {{this.travelduration}}</text><br>
                 <text>Miles Traveled: {{this.milestraveled}}</text><br><br>
-              {{/if_eq}}
+              {{!-- {{/if_eq}} --}}
             {{/each}}
             </div>
 
@@ -60,7 +60,7 @@
         <label>Train on this route</label>
         <select id="train-on-route">
           <option value="">None</option>
-          {{#each data3}}
+          {{#each route_train}}
           <option value={{this.trainID}}>{{this.trainID}}</option>
           {{/each}}
         </select>
