@@ -1,9 +1,17 @@
+
+
 var closebtns = document.getElementsByClassName("close");
 
 for (var i = 0; i < closebtns.length; i++) {
   closebtns[i].addEventListener("click", function () {
     this.parentElement.style.display = 'none';
   });
+}
+
+function showsearch() {
+  var allboxes = document.getElementById("search-container");
+  console.log(allboxes.style.display);
+  allboxes.style.display = "block";
 }
 
 /* Button that pops up form to add element for each entity */
@@ -24,25 +32,36 @@ function showmodal2() {
   }
 }
 
+var saveCards = document.getElementsByClassName("card");
+var saveStates = document.getElementsByClassName("station-state");
 
 function searchfunction() {
-  alert("Clicked!");
-  var filterinput = document.getElementById("search-input").value.trim();
-  console.log(filterinput);
-  var request = new XMLHttpRequest();
-  request.open('POST', "/stations/search");
-
-  var input = {
-    filter: filterinput
-  };
-
-  var requestBody = JSON.stringify(input);
-
-  console.log("Sent Request");
-
-  request.setRequestHeader('Content-type', 'application/json');
-  request.send(requestBody);
+  var stationID = document.getElementById("station_filter").value;
+  //construct the URL and redirect to it
+  window.location = '/stations/search/' + parseInt(stationID);
 }
+
+// function searchfunction() {
+//   // alert("Clicked!");
+//   var filterinput = document.getElementById("search-input").value.trim();
+//   // console.log(filterinput);
+//   var request = new XMLHttpRequest();
+//   request.open('GET', "/stations/search"); 
+
+//   var input = {
+//     filter: filterinput
+//   };
+
+//   var requestBody = JSON.stringify(input);
+
+//   console.log("Sent Request");
+
+//   request.setRequestHeader('Content-type', 'application/json');
+//   request.send(requestBody);
+//   console.log(request);
+
+// }
+
 
 
 // /* Inserts Train into flex container */
@@ -247,7 +266,7 @@ function insertstation() {
   var station_state_value = document.getElementById("station-state").value.trim();
   var station_city_value = document.getElementById("station-city").value.trim();
   var station_zipcode_value = document.getElementById("station-zipcode").value.trim();
-  if ( !(station_name_value && station_address_value && station_state_value && station_city_value && station_zipcode_value) )  {
+  if (!(station_name_value && station_address_value && station_state_value && station_city_value && station_zipcode_value)) {
     alert("Please resubmit form with all fields filled.");
   } else {
     var request = new XMLHttpRequest();
@@ -286,9 +305,9 @@ function inserttrain() {
   var train_first_value = document.getElementById("train-first-conductor").value.trim();
   var train_last_value = document.getElementById("train-last-conductor").value.trim();
 
-  if (! (train_model_value && train_cost_value && train_capacity_value &&
-      train_first_value && train_last_value) ) {
-        alert("Please resubmit form with all fields filled.");
+  if (!(train_model_value && train_cost_value && train_capacity_value &&
+    train_first_value && train_last_value)) {
+    alert("Please resubmit form with all fields filled.");
   } else {
     var request = new XMLHttpRequest();
     request.open('POST', "/trains/create");
@@ -342,4 +361,37 @@ function insertroute() {
   } else {
     alert("Please submit all fields");
   }
+}
+
+
+function insertstationroute() {
+  var add_route_input = document.getElementById('add-route').value.trim();
+  var add_station_input = document.getElementById('add-station').value.trim();
+  var travel_duration_input = document.getElementById('travel-duration').value.trim();
+  var miles_traveled_input = document.getElementById('miles-traveled').value.trim();
+  if (add_route_input && add_station_input) {
+    var request = new XMLHttpRequest();
+    request.open('POST', "/routesthrustations/create");
+    var routesthrustations = {
+      route: add_route_input,
+      station: add_station_input,
+      travel_duration: travel_duration_input,
+      miles_traveled: miles_traveled_input
+    };
+    var requestBody = JSON.stringify(routesthrustations);
+
+    request.addEventListener('load', function (event) {
+      if (event.target.status === 400) {
+        alert("The station being added to the route must be unique");
+      }
+    });
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(requestBody);
+    document.getElementsByClassName("insert")[0].reset();
+    document.getElementsByClassName("insert")[1].reset();
+  } else {
+    alert("Please fill out at least the route # and station #");
+  }
+
+
 }
