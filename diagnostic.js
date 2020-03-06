@@ -23,32 +23,16 @@ app.get('/home', function (req, res, next) {
   res.render('home', context);
 });
 
-// var express = require('express');
-
-// var app = express();
-// var router = express.Router();
-
-// var handlebars = require('express-handlebars').create({ defaultLayout: 'main' });
-// var bodyParser = require('body-parser');
-// var mysql = require('./dbcon.js');
-// // var path = require('path');
-
-// // app.use(express.static(path.join(__dirname, '/public')));
-// // app.use(express.static('public'));
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use('/stations', require('./index.js'));
-// app.use('/trains', require('./index.js'));
-// app.use('/routes', require('./index.js'));
-// app.use('/', express.static('public'));
-// // app.use(bodyParser.json());
-// app.engine('handlebars', handlebars.engine);
-// app.set('mysql', mysql);
-// app.set('view engine', 'handlebars');
-// app.set('port', process.argv[2]); 
-
-// // handlebars.handlebars.registerHelper('if_eq', function(arg1, arg2, options) {
-// //     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
-// // });
+function getDropdown(res, mysql, context, complete) {
+  mysql.pool.query("SELECT stationID, state FROM stations", function (error, result, fields) {
+    if (error) {
+      res.write(JSON.stringify(error));
+      res.end();
+    }
+    context.data_dropdown = result;
+    complete();
+  });
+}
 
 //get all station attributes to render the stations page properly
 function getStation(res, mysql, context, complete) {
@@ -131,9 +115,10 @@ app.get('/stations', function (req, res) {
   var context = {};
   var mysql = req.app.get('mysql');
   getStation(res, mysql, context, complete);
+  getDropdown(res, mysql, context, complete);  
   function complete() {
     callbackCount++;
-    if (callbackCount >= 1) {
+    if (callbackCount >= 2) {
       res.render('stations', context);
       // res.status(200).send("success");
     }
@@ -146,29 +131,16 @@ app.get('/stations/filter/:stationID', function (req, res) {
   var context = {};
   var mysql = req.app.get('mysql');
   getStationsbyState(req, res, mysql, context, complete);
-  // getStation(res, mysql, context, complete);
+  getDropdown(res, mysql, context, complete);  
   function complete() {
     callbackCount++;
-    if (callbackCount >= 1) {
+    if (callbackCount >= 2) {
       res.render('stations', context);
       // res.status(200).send(context);
       return;
     }
   }
 });
-
-// app.get('/stations/search', function(req, res, next) {
-//   var query = "SELECT * FROM stations WHERE state=?";
-//   var filter = req.body.filter;
-//   mysql.pool.query(query, [filter], function(error, results, fields) {
-//     if (error) {
-//       return next(error);
-//     } else {
-//       res.render('stations', {data: results});
-//       res.status(200).send(results);
-//     }
-//   });
-// });
 
 //Renders Trains page
 app.get('/trains', function (req, res, next) {

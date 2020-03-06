@@ -10,7 +10,7 @@
     <!--- this form does not submit directly, the button handles all the interaction with backend -->
     <label> Find Station </label>
     <select id='station_filter' name="station">
-      {{#each data}}
+      {{#each data_dropdown}}
       <option value="{{stationID}}">{{state}}</option>
       {{/each}}
     </select><br>
