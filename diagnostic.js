@@ -6,10 +6,21 @@ var path = require('path');
 var app = express();
 var handlebars = require('express-handlebars').create({
   defaultLayout: 'main',
+  helpers:{
+    if_eq: function (a, b, opts){
+      if (a == b)
+        return opts.fn(this);
+      else
+        return opts.inverse(this);
+    }
+  }
 });
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, '/public')));
@@ -22,6 +33,8 @@ app.get('/home', function (req, res, next) {
   var context = {};
   res.render('home', context);
 });
+
+
 
 function getDropdown(res, mysql, context, complete) {
   mysql.pool.query("SELECT stationID, state FROM stations", function (error, result, fields) {
@@ -87,12 +100,24 @@ function getTrainsonRoutes(res, mysql, context, complete){
 }
 
 function getRouteDetails(res, mysql, context, complete) {
-  mysql.pool.query('SELECT * FROM routesthrustations', function (error, result, fields) {
+  mysql.pool.query('SELECT routeID, stationID, travelduration, milestraveled FROM routesthrustations', function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
     }
     context.route_details = result;
+    // console.log(context.route_details);
+    complete();
+  });
+}
+
+function getRouteID(res, mysql, context, complete) {
+  mysql.pool.query('SELECT routeID FROM routesthrustations', function (error, result, fields) {
+    if (error) {
+      res.write(JSON.stringify(error));
+      res.end();
+    }
+    context.routeID = result;
     // console.log(context.route_details);
     complete();
   });
@@ -173,11 +198,12 @@ app.get('/routes', function (req, res, next){
   getRouteDetails(res, mysql, context, complete);
   getTrainsonRoutes(res, mysql, context, complete);
   getRouteStations(res, mysql, context, complete);
+  // getRouteID(res, mysql, context, complete);
 
 // console.log(context);
   function complete() {
     callbackCount++;
-    if (callbackCount >= 4) {
+    if (callbackCount >= 5) {
       console.log(context)
 
       res.render('routes', context);

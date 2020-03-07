@@ -30,11 +30,11 @@
             <div class="route-card">
 
             {{#each ../route_details}}
-              {{!-- {{#if_eq routeID this.routeID}}--}}
+              {{#if_eq ../routeID this.routeID}}
                 <text>Current-Station #: {{this.stationID}} </text><br>
                 <text>Travel Time: {{this.travelduration}}</text><br>
                 <text>Miles Traveled: {{this.milestraveled}}</text><br><br>
-              {{!-- {{/if_eq}} --}}
+              {{/if_eq}}
             {{/each}}
             </div>
 
