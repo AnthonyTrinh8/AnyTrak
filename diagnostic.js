@@ -140,7 +140,7 @@ app.get('/stations', function (req, res) {
   var context = {};
   var mysql = req.app.get('mysql');
   getStation(res, mysql, context, complete);
-  getDropdown(res, mysql, context, complete);  
+  getDropdown(res, mysql, context, complete);
   function complete() {
     callbackCount++;
     if (callbackCount >= 2) {
@@ -156,7 +156,7 @@ app.get('/stations/filter/:stationID', function (req, res) {
   var context = {};
   var mysql = req.app.get('mysql');
   getStationsbyState(req, res, mysql, context, complete);
-  getDropdown(res, mysql, context, complete);  
+  getDropdown(res, mysql, context, complete);
   function complete() {
     callbackCount++;
     if (callbackCount >= 2) {
@@ -189,11 +189,12 @@ app.get('/trains', function (req, res, next) {
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
+
 app.get('/routes', function (req, res, next){
   var callbackCount = 0;
   var context = {};
   var mysql = req.app.get('mysql');
-  
+
   getRoute(res, mysql, context, complete);
   getRouteDetails(res, mysql, context, complete);
   getTrainsonRoutes(res, mysql, context, complete);
@@ -203,7 +204,7 @@ app.get('/routes', function (req, res, next){
 // console.log(context);
   function complete() {
     callbackCount++;
-    if (callbackCount >= 5) {
+    if (callbackCount >= 4) {
       console.log(context)
 
       res.render('routes', context);
