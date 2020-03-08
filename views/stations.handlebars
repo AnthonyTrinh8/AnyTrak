@@ -29,6 +29,7 @@
     {{#each data}}
     <div class="col">
       <section class="card">
+        <button value={{this.stationID}} class="close" onclick="deletestations(this)">x</button>
         <div class="train-number">
           Station #{{this.stationID}}
         </div>

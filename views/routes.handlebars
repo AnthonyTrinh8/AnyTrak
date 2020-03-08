@@ -31,7 +31,7 @@
 
             {{#each ../route_details}}
               {{#if_eq ../routeID this.routeID}}
-                <button value={{this.routesthrustationsID}} class="close" onclick="deleteroutesthrustations(this);">x</button>
+                <button value={{this.routesthrustationsID}} class="close" onclick="deleteroutesthrustations(this)">x</button>
                 <text>Current-Station #: {{this.stationID}} </text><br>
                 <text>Travel Time: {{this.travelduration}}</text><br>
                 <text>Miles Traveled: {{this.milestraveled}}</text><br><br>

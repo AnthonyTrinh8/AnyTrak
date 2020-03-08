@@ -210,7 +210,7 @@ ALTER TABLE `routesthrustations`
 -- Constraints for table `trains`
 --
 ALTER TABLE `trains`
-  ADD CONSTRAINT `trains_ibfk_1` FOREIGN KEY (`stationID`) REFERENCES `stations` (`stationID`);
+  ADD CONSTRAINT `trains_ibfk_1` FOREIGN KEY (`stationID`) REFERENCES `stations` (`stationID`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -100,7 +100,7 @@ function getTrainsonRoutes(res, mysql, context, complete){
 }
 
 function getRouteDetails(res, mysql, context, complete) {
-  mysql.pool.query('SELECT routeID, stationID, travelduration, milestraveled FROM routesthrustations', function (error, result, fields) {
+  mysql.pool.query('SELECT routesthrustationsID, routeID, stationID, travelduration, milestraveled FROM routesthrustations', function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
@@ -180,7 +180,7 @@ app.get('/trains', function (req, res, next) {
           return next(error);
         } else {
           var context2 = results;
-          res.render('trains', { data: context1, data1: context2 });
+          res.render('trains', { trains: context1, stations: context2 });
         }
       });
     }
@@ -307,6 +307,7 @@ app.post('/trains/create', function (req, res, next) {
   }
 });
 
+//Inserts one route entity
 app.post('/routes/create', function (req, res, next) {
   if (req.body && req.body.route_name && req.body.train_on_route && req.body.ticket_price) {
     console.log(req.body);
@@ -328,6 +329,7 @@ app.post('/routes/create', function (req, res, next) {
   }
 });
 
+//Inserts one routesthrustations entity
 app.post('/routesthrustations/create', function (req, res, next) {
   if (req.body && req.body.route && req.body.station) {
     var route = req.body.route;
@@ -348,6 +350,32 @@ app.post('/routesthrustations/create', function (req, res, next) {
 });
 
 
+app.post('/trains/update', function (req, res, next) {
+  if (req.body && req.body.train_id && req.body.train_model && req.body.train_cost && req.body.train_capacity && req.body.train_first && req.body.train_last) {
+      var train_id = req.body.train_id;
+      var main_station = req.body.main_station;
+      var train_model = req.body.train_model;
+      var train_cost = req.body.train_cost;
+      var train_capacity = req.body.train_capacity;
+      var train_first = req.body.train_first;
+      var train_last = req.body.train_last;
+
+      var query = "UPDATE trains SET stationID =?, model =?, cost =?, capacity =?, conductorfirstname =?, conductorlastname =? WHERE trainID=?";
+
+      mysql.pool.query(query, [main_station, train_model, train_cost, train_capacity, train_first, train_last, train_id], function (error, results, fields) {
+        if (error) {
+          return next(error);
+        } else {
+          res.status(200).send("Successfully updated train entity!");
+        }
+      });
+  } else {
+    res.status(400).send( { error: "Train could not be updated."});
+  }
+});
+
+
+//Deletes one route entity
 app.post('/routes/delete', function (req, res, next) {
   if (req.body.route_id) {
     var query = "DELETE FROM routes WHERE routeID=?";
@@ -355,7 +383,7 @@ app.post('/routes/delete', function (req, res, next) {
       if (error) {
         return next(error);
       } else {
-        res.status(200).send("Successfully deleted route");
+        res.status(200).send("Successfully deleted routes entity");
       }
     });
   } else {
@@ -363,23 +391,39 @@ app.post('/routes/delete', function (req, res, next) {
   }
 });
 
+//Deletes one routesthrustations entity
 app.post('/routesthrustations/delete', function (req, res, next) {
-  if (req.body.routesthrustations_id) {
-    console.log(req.body.routesthrustations_id);
+  if (req.body.rts_id) {
     var query = "DELETE FROM routesthrustations WHERE routesthrustationsID=?";
-    mysql.pool.query(query, [req.body.routesthrustations_id], function (error, results, fields) {
+    mysql.pool.query(query, [req.body.rts_id], function (error, results, fields) {
       if (error) {
         return next(error);
       } else {
-        res.status(200).send("Successfully deleted routesthrustations");
+        res.status(200).send("Successfully deleted routesthrustations entity.");
       }
 
     });
   } else {
     res.status(400).send( { error: "Error with deletion."});
   }
-
 });
+
+//Delets one stations entity
+app.post('/stations/delete', function (req, res, next) {
+  if (req.body.station_id) {
+    var query = "DELETE FROM stations WHERE stationID=?";
+    mysql.pool.query(query, [req.body.station_id], function (error, results, fields) {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).send("Successfully deleted stations entity.");
+      }
+    });
+  } else {
+    res.status(400).send( { error: "Error with deletion."});
+  }
+});
+
 
 
 app.use(function (req, res) {

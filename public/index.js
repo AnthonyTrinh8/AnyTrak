@@ -390,7 +390,57 @@ function insertstationroute() {
 }
 
 
+function updatetrain() {
+  var train_id_input = document.getElementById('update-train-id').value;
+  var main_station_input = document.getElementById('main-station-update').value;
+  var train_model_input = document.getElementById('train-model-update').value;
+  var train_cost_input = document.getElementById('train-cost-update').value;
+  var train_capacity_input = document.getElementById('train-capacity-update').value;
+  var train_first_input = document.getElementById('train-conductor-first-update').value;
+  var train_last_input = document.getElementById('train-conductor-last-update').value;
+
+  if (!(main_station_input && train_model_input && train_cost_input && train_capacity_input
+      && train_first_input && train_last_input)) {
+        alert('All fields must be filled.');
+
+
+  } else {
+    var request = new XMLHttpRequest();
+    request.open('POST', "/trains/update");
+
+
+    var train = {
+      train_id: train_id_input,
+      main_station: main_station_input,
+      train_model: train_model_input,
+      train_cost: train_cost_input,
+      train_capacity: train_capacity_input,
+      train_first: train_first_input,
+      train_last: train_last_input
+    }
+
+
+
+    var requestBody = JSON.stringify(train);
+
+    request.addEventListener('load', function (event) {
+      if (event.target.status === 200) {
+        window.location.reload();
+      }
+    });
+
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(requestBody);
+    document.getElementsByClassName("update")[0].reset();
+
+  }
+
+}
+
+
+
 function deleteroute(buttonObject) {
+  console.log(buttonObject.value);
   var route_id_select = buttonObject.value;
   var request = new XMLHttpRequest();
   request.open('POST', "/routes/delete");
@@ -412,8 +462,10 @@ function deleteroutesthrustations(buttonObject) {
   var routesthrustations_id_select = buttonObject.value;
   var request = new XMLHttpRequest();
   request.open('POST', "/routesthrustations/delete");
+  console.log(routesthrustations_id_select);
+  console.log(buttonObject.value);
   var rts = {
-    routesthrustations_id: routesthrustations_id_select
+    rts_id: routesthrustations_id_select
   }
   var requestBody = JSON.stringify(rts);
   request.setRequestHeader('Content-type', 'application/json');
@@ -423,4 +475,25 @@ function deleteroutesthrustations(buttonObject) {
       window.location.reload();
     }
   });
+}
+
+
+function deletestations(buttonObject) {
+  var station_id_select = buttonObject.value;
+  var request = new XMLHttpRequest();
+  request.open('POST', "/stations/delete");
+  var stations = {
+    station_id: station_id_select
+  }
+  var requestBody = JSON.stringify(stations);
+  request.setRequestHeader('Content-type', 'application/json');
+  request.send(requestBody);
+  request.addEventListener('load', function (event) {
+    if (event.target.status === 200) {
+      window.location.reload();
+    }
+  });
+
+
+
 }

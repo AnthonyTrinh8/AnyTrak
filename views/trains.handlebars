@@ -12,12 +12,20 @@
 <main id="card-container">
   <div id="row">
 
-    {{#each data}}
+    {{#each trains}}
     <div class="col">
       <section class="card">
         <div class="train-number">
           Train {{this.trainID}}
         </div>
+        {{#each ../stations}}
+          {{#if_eq ../stationID this.stationID}}
+            <div class="main-station">
+              Main Station: {{this.stationname}}
+            </div>
+          {{/if_eq}}
+        {{/each}}
+
         <div class="train-conductor">
           Conductor: {{this.conductorfirstname}} + {{this.conductorlastname}}
         </div>
@@ -25,7 +33,7 @@
           Model: {{this.model}}
         </div>
         <div class="train-price">
-          Price: {{this.cost}}
+          Cost: {{this.cost}}
         </div>
         <div class="train-capacity">
           Capacity: {{this.capacity}}
@@ -45,7 +53,7 @@
     <label>Main Station</label>
     <select id="main-station">
       <option value="">None</option>
-      {{#each data1}}
+      {{#each stations}}
       <option value={{this.stationID}}>{{this.stationname}}</option>
       {{/each}}
     </select>
@@ -81,32 +89,41 @@
   </div>
   <div class="update-box">
     <label>Train #</label>
-    <select name="train">
-      <option value="1">Train 1</option>
-      <option value="2">Train 2</option>
-      <option value="3">Train 3</option>
-      <option value="4">Train 4</option>
+    <select name="train" id="update-train-id">
+      <option value="">None</option>
+      {{#each trains}}
+        <option value={{this.trainID}}>Train #{{this.trainID}}</option>
+      {{/each}}
     </select>
   </div>
   <div class="update-box">
-    <label>Assigned Route</label>
-    <input type="text" id="train-route-update">
+    <Label>Main Station</label>
+    <select id="main-station-update">
+      <option value="">None</option>
+      {{#each stations}}
+      <option value={{this.stationID}}>{{this.stationname}}</option>
+      {{/each}}
+    </select>
   </div>
   <div class="update-box">
     <label>Model</label>
     <input type="text" id="train-model-update">
   </div>
   <div class="update-box">
-    <label>Price</label>
-    <input type="text" id="train-price-update">
+    <label>Cost</label>
+    <input type="text" id="train-cost-update">
   </div>
   <div class="update-box">
     <label>Capacity</label>
     <input type="text" id="train-capacity-update">
   </div>
   <div class="update-box">
-    <label>Conductor</label>
-    <input type="text" id="train-conductor-update">
+    <label>Conductor's First Name</label>
+    <input type="text" id="train-conductor-first-update">
   </div>
-  <button onclick="" class="button" id="submit-update-train">Submit</button>
+  <div class="update-box">
+    <label>Conductor's Last Name</label>
+    <input type="text" id="train-conductor-last-update">
+  </div>
+  <button onclick="updatetrain();" class="button" id="submit-update-train">Submit</button>
 </form>
