@@ -348,6 +348,40 @@ app.post('/routesthrustations/create', function (req, res, next) {
 });
 
 
+app.post('/routes/delete', function (req, res, next) {
+  if (req.body.route_id) {
+    var query = "DELETE FROM routes WHERE routeID=?";
+    mysql.pool.query(query, [req.body.route_id], function (error, results, fields) {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).send("Successfully deleted route");
+      }
+    });
+  } else {
+    res.status(400).send( { error: "Error with deletion."})
+  }
+});
+
+app.post('/routesthrustations/delete', function (req, res, next) {
+  if (req.body.routesthrustations_id) {
+    console.log(req.body.routesthrustations_id);
+    var query = "DELETE FROM routesthrustations WHERE routesthrustationsID=?";
+    mysql.pool.query(query, [req.body.routesthrustations_id], function (error, results, fields) {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).send("Successfully deleted routesthrustations");
+      }
+
+    });
+  } else {
+    res.status(400).send( { error: "Error with deletion."});
+  }
+
+});
+
+
 app.use(function (req, res) {
   console.error(err.stack);
   res.status(404);

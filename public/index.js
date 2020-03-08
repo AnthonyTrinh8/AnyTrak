@@ -41,7 +41,7 @@ function searchfunction() {
 //   var filterinput = document.getElementById("search-input").value.trim();
 //   // console.log(filterinput);
 //   var request = new XMLHttpRequest();
-//   request.open('GET', "/stations/search"); 
+//   request.open('GET', "/stations/search");
 
 //   var input = {
 //     filter: filterinput
@@ -291,7 +291,7 @@ function insertstation() {
 
 
 
-
+/* Inserts Trains into flex container */
 function inserttrain() {
   var station_id_value = document.getElementById("main-station").value.trim();
   var train_model_value = document.getElementById("train-model").value.trim();
@@ -329,7 +329,7 @@ function inserttrain() {
   document.getElementsByClassName("insert")[0].reset();
 }
 
-
+/* Inserts Routes into flex container */
 function insertroute() {
   var route_name_input = document.getElementById("route-name").value.trim();
   var train_on_route_input = document.getElementById('train-on-route').value.trim();
@@ -358,7 +358,7 @@ function insertroute() {
   }
 }
 
-
+/* Insert Routesthrustations into flex container */
 function insertstationroute() {
   var add_route_input = document.getElementById('add-route').value.trim();
   var add_station_input = document.getElementById('add-station').value.trim();
@@ -387,6 +387,40 @@ function insertstationroute() {
   } else {
     alert("Please fill out at least the route # and station #");
   }
+}
 
 
+function deleteroute(buttonObject) {
+  var route_id_select = buttonObject.value;
+  var request = new XMLHttpRequest();
+  request.open('POST', "/routes/delete");
+  var routes = {
+    route_id: route_id_select
+  }
+  var requestBody = JSON.stringify(routes);
+
+  request.setRequestHeader('Content-type', 'application/json');
+  request.send(requestBody);
+  request.addEventListener('load', function (event) {
+    if (event.target.status === 200) {
+      window.location.reload();
+    }
+  });
+}
+
+function deleteroutesthrustations(buttonObject) {
+  var routesthrustations_id_select = buttonObject.value;
+  var request = new XMLHttpRequest();
+  request.open('POST', "/routesthrustations/delete");
+  var rts = {
+    routesthrustations_id: routesthrustations_id_select
+  }
+  var requestBody = JSON.stringify(rts);
+  request.setRequestHeader('Content-type', 'application/json');
+  request.send(requestBody);
+  request.addEventListener('load', function (event) {
+    if (event.target.status === 200) {
+      window.location.reload();
+    }
+  });
 }

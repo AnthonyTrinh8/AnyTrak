@@ -11,7 +11,7 @@
       {{#each route_data}}
         <div class="col">
           <section class="card">
-            <span class="close">x</span>
+            <button value={{this.routeID}} class="close" onclick="deleteroute(this)">x</button>
             <div class="route-number">
               Route #{{this.routeID}}
               <div class="route-name">
@@ -31,6 +31,7 @@
 
             {{#each ../route_details}}
               {{#if_eq ../routeID this.routeID}}
+                <button value={{this.routesthrustationsID}} class="close" onclick="deleteroutesthrustations(this);">x</button>
                 <text>Current-Station #: {{this.stationID}} </text><br>
                 <text>Travel Time: {{this.travelduration}}</text><br>
                 <text>Miles Traveled: {{this.milestraveled}}</text><br><br>
@@ -78,23 +79,32 @@
       </div>
       <div class="input-box">
         <label>Select Route To Add Stations To</label>
-        <select name="route">
-          <option value="1">Route 1</option>
-          <option value="2">Route 2</option>
-          <option value="3">Route 3</option>
-          <option value="4">Route 4</option>
+        <select name="route" id="add-route">
+          {{#each route_data}}
+            <option value={{this.routeID}}>Route #{{this.routeID}}</option>
+          {{/each}}
         </select>
       </div>
       <div class="input-box">
         <label>Select From Available Station</label>
-        <select name="station">
-          <option value="1">Station 1</option>
-          <option value="2">Station 2</option>
-          <option value="3">Station 3</option>
-          <option value="4">Station 4</option>
+        <select name="station" id="add-station">
+          {{#each route_stations}}
+            <option value={{this.stationID}}>Station #{{this.stationID}}</option>
+          {{/each}}
         </select>
       </div>
-      <button onclick="insertstationroute(); return false;" class="button" id="submit-station-route">Submit</button>
+      <div class="input-box">
+        <label>Travel Duration (minutes)</label>
+        <input type="number" min="0" step"1" id="travel-duration">
+      </div>
+      <div class="input-box">
+        <label>Miles Traveled (minutes)</label>
+        <input type="number" min="0" step="1" id="miles-traveled">
+      </div>
+
+
+
+      <button onclick="insertstationroute();" class="button" id="submit-station-route">Submit</button>
     </form>
 
   </body>

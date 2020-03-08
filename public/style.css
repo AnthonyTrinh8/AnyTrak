@@ -184,8 +184,8 @@ float: right;
     display: flex;
     align-items: center;
     justify-content: center;
-    
-  
+
+
 }
 
 .row:after {
@@ -233,7 +233,7 @@ float: right;
   cursor: pointer;
   position: relative;
   transform: translate(-1%, -45%);
-  padding: 45px 245px;
+  /*padding: 45px 245px;*/
 
   /* top: 50%;
   right: 0%;
