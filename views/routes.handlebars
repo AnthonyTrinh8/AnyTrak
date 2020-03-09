@@ -11,7 +11,7 @@
       {{#each route_data}}
         <div class="col">
           <section class="card">
-            <button value={{this.routeID}} class="close" onclick="deleteroute(this)">x</button>
+            <button value={{this.routeID}} class="close_card" onclick="deleteroute(this)">x</button>
             <div class="route-number">
               Route #{{this.routeID}}
               <div class="route-name">
@@ -38,10 +38,6 @@
               {{/if_eq}}
             {{/each}}
             </div>
-
-
-
-
           </section>
         </div>
       {{/each}}

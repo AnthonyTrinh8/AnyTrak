@@ -301,7 +301,7 @@ function inserttrain() {
   var train_last_value = document.getElementById("train-last-conductor").value.trim();
 
   if (!(train_model_value && train_cost_value && train_capacity_value &&
-    train_first_value && train_last_value)) {
+    train_first_value && train_last_value && station_id_value)) {
     alert("Please resubmit form with all fields filled.");
   } else {
     var request = new XMLHttpRequest();
