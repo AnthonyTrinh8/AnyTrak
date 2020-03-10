@@ -211,24 +211,28 @@ float: right;
   margin-top: 5px;
 }
 
+.route-sub-card {
+  margin-top: 5px;
+  border-bottom: 5px solid black;
+  border-bottom-width: thin;
+}
 /* Route Number text */
 .route-number {
-  color: white;
-  /* padding: 10px; */
+    /* padding: 10px; */
   padding: 10px;
-  background-color: rgb(5, 0, 0);
+  border-style: solid;
+  border-color: black;
 }
 
 .close {
   cursor: pointer;
   position: relative;
-  transform: translate(-1%, -15%);
-  radius: 45%;
-  background-color: lightcoral;
-  width: 20px;
-  height: 20px;
+  transform: translate(-1%, -8%);
+  width: 17px;
+  height: 17px;
   border-radius: 50px; /* Curve of border corners */
-  color: white; /* Text color */
+  border: solid;
+  border-width: thin;
 }
 
 .close_card {
@@ -247,9 +251,12 @@ float: right;
 /* Station name text in routesthrustations */
 .stationname {
   flex: 3 30%;
-  font-size: 25px;
+  /* font-size: 25px; */
   /* text-transform: uppercase; */
-  /* font-weight: bold; */
+  font-weight: bold;
+  border-bottom: 5px solid black;
+  border-bottom-width: thin;
+  padding: 5px;
   text-align: left;
 }
 
