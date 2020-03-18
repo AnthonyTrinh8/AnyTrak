@@ -16,12 +16,13 @@
     <div class="col">
       <section class="card">
         <div class="train-number">
-          Train {{this.trainID}}
+          Train ID: {{this.trainID}}
         </div>
+        <p style="display:inline"> Main Station: </p>
         {{#each ../stations}}
           {{#if_eq ../stationID this.stationID}}
-            <div class="main-station">
-              Main Station: {{this.stationname}}
+            <div class="main-station" style="display:inline">
+              {{this.stationname}}
             </div>
           {{/if_eq}}
         {{/each}}
