@@ -20,6 +20,10 @@
               <div class="train-number">
                 Train # on this route: {{this.trainID}}
               </div>
+              <div>
+                Ticket Price: {{this.ticketprice}}
+              </div>
+
             </div>
 
 
@@ -58,7 +62,6 @@
       <div class="input-box">
         <label>Train on this route</label>
         <select id="train-on-route">
-          <option value="">None</option>
           {{#each route_train}}
           <option value={{this.trainID}}>{{this.trainID}}</option>
           {{/each}}
@@ -93,11 +96,11 @@
       </div>
       <div class="input-box">
         <label>Travel Duration (minutes)</label>
-        <input type="number" min="0" step"1" id="travel-duration">
+        <input type="number" min="0" step"1" id="travel-duration" value=0>
       </div>
       <div class="input-box">
         <label>Miles Traveled (minutes)</label>
-        <input type="number" min="0" step="1" id="miles-traveled">
+        <input type="number" min="0" step="1" id="miles-traveled" value=0>
       </div>
 
 

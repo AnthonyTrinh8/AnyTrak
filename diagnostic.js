@@ -23,21 +23,18 @@ app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, '/public')));
-// app.set('views', path.join(__dirname, 'views'));
 app.use('/', express.static('public'));
 app.set('port', process.argv[2]);
 app.set('mysql', mysql);
-//Renders Home page
-app.get('/home', function (req, res, next) {
-  var context = {};
-  res.render('home', context);
-});
 
 
 
+
+// ---------------------------------------- Functions for individual queries----------------------------------------------//
+
+//Gets the info needed to render the stations page filtered by state
 function getDropdown(res, mysql, context, complete) {
-  mysql.pool.query("SELECT stationID, state FROM stations", function (error, result, fields) {
+  mysql.pool.query("SELECT stationID, state FROM Stations", function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
@@ -47,20 +44,21 @@ function getDropdown(res, mysql, context, complete) {
   });
 }
 
-//get all station attributes to render the stations page properly
+//Gets all station attributes to render the stations page properly
 function getStation(res, mysql, context, complete) {
-  mysql.pool.query("SELECT stationID, stationname, address, state, city, zipcode FROM stations", function (error, result, fields) {
+  mysql.pool.query("SELECT stationID, stationname, address, state, city, zipcode FROM Stations", function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
     }
-    context.data = result;
+    context.stations = result;
     complete();
   });
 }
-//get the station that corresponds to the stationID the user requested.
+
+//Get the Stations that corresponds to the stationID the user requested.
 function getStationsbyState(req, res, mysql, context, complete) {
-  var query = "SELECT stationID, stationname, address, state, city, zipcode FROM stations WHERE stationID = ?";
+  var query = "SELECT stationID, stationname, address, state, city, zipcode FROM Stations WHERE stationID = ?";
   var filter = [req.params.stationID];
   // console.log(filter);
 
@@ -69,14 +67,15 @@ function getStationsbyState(req, res, mysql, context, complete) {
       res.write(JSON.stringify(error));
       res.end();
     }
-    context.data = results;
+    context.stations = results;
     // res.status(200).send(results);
     complete();
   });
 }
 
+//Gets all attributes from all Stations entries
 function getRoute(res, mysql, context, complete) {
-  mysql.pool.query('SELECT * FROM routes', function (error, result, fields) {
+  mysql.pool.query('SELECT routeID, trainID, routename, ticketprice FROM Routes', function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
@@ -87,8 +86,9 @@ function getRoute(res, mysql, context, complete) {
   });
 }
 
+//Gets info needed for user to select Trains FK
 function getTrainsonRoutes(res, mysql, context, complete){
-  mysql.pool.query('SELECT trainID FROM trains ORDER BY trainID', function (error, result, fields) {
+  mysql.pool.query('SELECT trainID FROM Trains ORDER BY TrainID', function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
@@ -99,32 +99,23 @@ function getTrainsonRoutes(res, mysql, context, complete){
   });
 }
 
+//Gets all attributes from all RoutesThruStations entries
 function getRouteDetails(res, mysql, context, complete) {
-  mysql.pool.query('SELECT routesthrustationsID, routeID, stationID, travelduration, milestraveled FROM routesthrustations', function (error, result, fields) {
+  mysql.pool.query('SELECT routesthrustationsID, routeID, stationID, travelduration, milestraveled FROM RoutesThruStations', function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
     }
     context.route_details = result;
-    // console.log(context.route_details);
     complete();
   });
 }
 
-function getRouteID(res, mysql, context, complete) {
-  mysql.pool.query('SELECT routeID FROM routesthrustations', function (error, result, fields) {
-    if (error) {
-      res.write(JSON.stringify(error));
-      res.end();
-    }
-    context.routeID = result;
-    // console.log(context.route_details);
-    complete();
-  });
-}
 
+
+//Gets info needed for user to select Stations FK
 function getRouteStations(res, mysql, context, complete) {
-  mysql.pool.query('SELECT stationID FROM stations ORDER BY stationID', function (error, result, fields) {
+  mysql.pool.query('SELECT stationID FROM Stations ORDER BY stationID', function (error, result, fields) {
     if (error) {
       res.write(JSON.stringify(error));
       res.end();
@@ -133,6 +124,48 @@ function getRouteStations(res, mysql, context, complete) {
     complete();
   });
 }
+
+//Gets all attributes from all Trains entries
+function getTrainDetails(res, mysql, context, complete) {
+  mysql.pool.query('SELECT trainID, stationID, model, cost, capacity, conductorfirstname, conductorlastname FROM Trains', function (error, results, fields) {
+    if (error) {
+      res.write(JSON.stringify(error));
+      res.end()
+    }
+    context.trains = results;
+    complete();
+  });
+}
+
+//Gets info needed for user to select Stations FK
+function getStationsDropdown(res, mysql, context, complete) {
+  mysql.pool.query('SELECT stationID, stationname FROM Stations ORDER BY stationID', function (error, result, fields) {
+    if (error) {
+      res.write(JSON.stringify(error));
+      res.end();
+    }
+    context.stations = result;
+    complete();
+  });
+}
+
+// ---------------------------------------------------------------------------------------------------------------------//
+
+
+
+
+
+
+// -------------------------------------------- Gets -------------------------------------------//
+
+
+
+//Renders Home page
+app.get('/home', function (req, res, next) {
+  var context = {};
+  res.render('home', context);
+});
+
 
 //Renders Stations page with all the stations and their attributes.
 app.get('/stations', function (req, res) {
@@ -145,7 +178,6 @@ app.get('/stations', function (req, res) {
     callbackCount++;
     if (callbackCount >= 2) {
       res.render('stations', context);
-      // res.status(200).send("success");
     }
   }
 });
@@ -161,7 +193,6 @@ app.get('/stations/filter/:stationID', function (req, res) {
     callbackCount++;
     if (callbackCount >= 2) {
       res.render('stations', context);
-      // res.status(200).send(context);
       return;
     }
   }
@@ -169,27 +200,24 @@ app.get('/stations/filter/:stationID', function (req, res) {
 
 //Renders Trains page
 app.get('/trains', function (req, res, next) {
+  var callbackCount = 0;
   var context = {};
-  mysql.pool.query('SELECT * FROM trains', function (error, results, fields) {
-    if (error) {
-      return next(error);
-    } else {
-      var context1 = results;
-      mysql.pool.query('SELECT stationID, stationname FROM stations', function (error, results, fields) {
-        if (error) {
-          return next(error);
-        } else {
-          var context2 = results;
-          res.render('trains', { trains: context1, stations: context2 });
-        }
-      });
+  var mysql = req.app.get('mysql');
+  getTrainDetails(res, mysql, context, complete);
+  getStationsDropdown(res, mysql, context, complete);
+  function complete() {
+    callbackCount++;
+    if (callbackCount >=2) {
+      res.render('trains',context);
+      return;
     }
-  });
+  }
 });
 
-app.get('/favicon.ico', (req, res) => res.status(204));
+//app.get('/favicon.ico', (req, res) => res.status(204));
 
 
+//Renders Routes Page
 app.get('/routes', function (req, res, next){
   var callbackCount = 0;
   var context = {};
@@ -213,143 +241,91 @@ app.get('/routes', function (req, res, next){
   }
 });
 
-//Renders Routes + RoutesThruStations page
-// app.get('/routes', function (req, res, next) {
-//   var context = {};
-//   mysql.pool.query('SELECT * FROM routes', function (error, results, fields) {
-//     if (error) {
-//       res.write(JSON.stringify(error));
-//       res.end();
-//       return next(error);
-//     } else {
-//       var context1 = results;
-//       mysql.pool.query('SELECT * FROM routesthrustations', function (error, results, fields) {
-//         if (error) {
-//           res.write(JSON.stringify(error));
-//           res.end();
-//           return next(error);
-//         } else {
-//           var context2 = results;
-//           mysql.pool.query('SELECT trainID FROM trains ORDER BY trainID', function (error, results, fields) {
-//             if (error) {
-//               res.write(JSON.stringify(error));
-//               res.end();
-//               return next(error);
-//             } else {
-//               var context3 = results;
-//               mysql.pool.query('SELECT * FROM stations ORDER BY stationID', function (error, results, fields) {
-//                 if (error) {
-//                   res.write(JSON.stringify(error));
-//                   res.end();
-//                   return next(error);
-//                 } else {
-//                   var context4 = results;
-//                   res.render('routes', { data1: context1, routesthrustations: context2, trians: context3, stations: context4 });
-//                   // console.log(context1, context2,context3,context4);
-//                 }
-//               });
-//             }
-//           });
-//         }
-//       });
-//     }
-//   });
-// });
+// -------------------------------------------------------------------------------------------//
 
-//Inserts one station entity
+
+
+
+
+
+//Inserts one entry into Stations entity
 app.post('/stations/create', function (req, res, next) {
-  if (req.body && req.body.station_name_input && req.body.station_address_input
-    && req.body.station_state_input && req.body.station_city_input &&
-    req.body.station_zipcode_input) {
-    var station_name = req.body.station_name_input;
-    var station_address = req.body.station_address_input;
-    var station_state = req.body.station_state_input;
-    var station_city = req.body.station_city_input;
-    var station_zipcode = req.body.station_zipcode_input;
 
-    var query = "INSERT INTO stations (stationname, address, state, city, zipcode) VALUES (?,?,?,?,?)";
-    mysql.pool.query(query, [station_name, station_address, station_state, station_city, station_zipcode], function (error, results, fields) {
-      if (error) {
-        return next(error);
-      } else {
-        res.status(200).send("Successfully added station to database.");
-      }
-    });
+var station_name = req.body.station_name_input;
+var station_address = req.body.station_address_input;
+var station_state = req.body.station_state_input;
+var station_city = req.body.station_city_input;
+var station_zipcode = req.body.station_zipcode_input;
+
+var query = "INSERT INTO Stations (stationname, address, state, city, zipcode) VALUES (?,?,?,?,?)";
+mysql.pool.query(query, [station_name, station_address, station_state, station_city, station_zipcode], function (error, results, fields) {
+  if (error) {
+    res.status(400).send({});
   } else {
-    res.status(400).send({ error: "All fields must be filled." });
+    res.status(200).send({});
   }
 });
 
-//Inserts one train entity
+});
+
+//Inserts one entry into Trains entity
 app.post('/trains/create', function (req, res, next) {
-  if (req.body && req.body.train_model_input && req.body.train_cost_input &&
-    req.body.train_capacity_input && req.body.train_first_input &&
-    req.body.train_last_input) {
-    console.log(req.body);
     var station_id = req.body.station_id_input;
     var train_model = req.body.train_model_input;
     var train_cost = req.body.train_cost_input;
     var train_capacity = req.body.train_capacity_input;
     var train_first = req.body.train_first_input;
     var train_last = req.body.train_last_input;
-    console.log(req.body);
-    var query = "INSERT INTO trains (stationID, model, cost, capacity, conductorfirstname, conductorlastname) VALUES (?,?,?,?,?,?)";
+
+    var query = "INSERT INTO Trains (stationID, model, cost, capacity, conductorfirstname, conductorlastname) VALUES (?,?,?,?,?,?)";
     mysql.pool.query(query, [station_id, train_model, train_cost, train_capacity, train_first, train_last], function (error, results, fields) {
       if (error) {
-        return next(error);
+        res.status(400).send({});
       } else {
-        res.status(200).send("Successfully added train to database.");
+        res.status(200).send({});
       }
 
     });
-  } else {
-    res.status(400).send({ error: "All input fields must be filled." })
-  }
+
 });
 
-//Inserts one route entity
+//Inserts one entry into Routes entity
 app.post('/routes/create', function (req, res, next) {
-  if (req.body && req.body.route_name && req.body.train_on_route && req.body.ticket_price) {
-    console.log(req.body);
-    var route_name = req.body.route_name;
-    var train_on_route = req.body.train_on_route;
-    var ticket_price = req.body.ticket_price
-    var query = "INSERT INTO routes (trainID, routename, ticketprice) VALUES (?,?,?)";
-    mysql.pool.query(query, [train_on_route, route_name, ticket_price], function (error, results, fields) {
-      if (error) {
-        return next(error);
-      } else {
-        res.status(200).send("Successfully added route to database.");
-      }
+  var route_name = req.body.route_name;
+  var train_on_route = req.body.train_on_route;
+  var ticket_price = req.body.ticket_price
 
-
-    });
-  } else {
-    res.status(400).send({ error: "All input fields must be filled." });
-  }
+  var query = "INSERT INTO Routes (trainID, routename, ticketprice) VALUES (?,?,?)";
+  mysql.pool.query(query, [train_on_route, route_name, ticket_price], function (error, results, fields) {
+    if (error) {
+      res.status(400).send({});
+    } else {
+      res.status(200).send({});
+    }
+  });
 });
 
-//Inserts one routesthrustations entity
+
+
+
+//Inserts one entry into RoutesThruStations entity
 app.post('/routesthrustations/create', function (req, res, next) {
-  if (req.body && req.body.route && req.body.station) {
     var route = req.body.route;
     var station = req.body.station;
     var travel_duration = req.body.travel_duration;
     var miles_traveled = req.body.miles_traveled;
-    var query = "INSERT INTO routesthrustations (routeID, stationID, travelduration, milestraveled) VALUES (?,?,?,?)";
+    var query = "INSERT INTO RoutesThruStations (routeID, stationID, travelduration, milestraveled) VALUES (?,?,?,?)";
     mysql.pool.query(query, [route, station, travel_duration, miles_traveled], function (error, results, fields) {
       if (error) {
-        return next(error);
+        res.status(400).send({});
       } else {
         res.status(200).send("Successfully added stations to routesthrustations in database");
       }
     });
-  } else {
-    res.status(400).send({ error: "Input fields for routes and stations must be filled." });
-  }
 });
 
 
+//Updates one of the entries in the Trains entity
 app.post('/trains/update', function (req, res, next) {
   if (req.body && req.body.train_id && req.body.train_model && req.body.train_cost && req.body.train_capacity && req.body.train_first && req.body.train_last) {
       var train_id = req.body.train_id;
@@ -360,81 +336,79 @@ app.post('/trains/update', function (req, res, next) {
       var train_first = req.body.train_first;
       var train_last = req.body.train_last;
 
-      var query = "UPDATE trains SET stationID =?, model =?, cost =?, capacity =?, conductorfirstname =?, conductorlastname =? WHERE trainID=?";
+      var query = "UPDATE Trains SET stationID =?, model =?, cost =?, capacity =?, conductorfirstname =?, conductorlastname =? WHERE trainID=?";
 
       mysql.pool.query(query, [main_station, train_model, train_cost, train_capacity, train_first, train_last, train_id], function (error, results, fields) {
         if (error) {
-          return next(error);
+          res.status(400).send({})
         } else {
           res.status(200).send("Successfully updated train entity!");
         }
       });
   } else {
-    res.status(400).send( { error: "Train could not be updated."});
+    res.status(400).send({});
   }
 });
 
 
-//Deletes one route entity
+//Deletes one entry in the Routes entity
 app.post('/routes/delete', function (req, res, next) {
   if (req.body.route_id) {
-    var query = "DELETE FROM routes WHERE routeID=?";
+    var query = "DELETE FROM Routes WHERE routeID=?";
     mysql.pool.query(query, [req.body.route_id], function (error, results, fields) {
       if (error) {
-        return next(error);
+        res.status(400).send({});
       } else {
         res.status(200).send("Successfully deleted routes entity");
       }
     });
   } else {
-    res.status(400).send( { error: "Error with deletion."})
+    res.status(400).send({});
   }
 });
 
-//Deletes one routesthrustations entity
+//Deletes one entry in the RoutesThruStations entity
 app.post('/routesthrustations/delete', function (req, res, next) {
   if (req.body.rts_id) {
-    var query = "DELETE FROM routesthrustations WHERE routesthrustationsID=?";
+    var query = "DELETE FROM RoutesThruStations WHERE routesthrustationsID=?";
     mysql.pool.query(query, [req.body.rts_id], function (error, results, fields) {
       if (error) {
-        return next(error);
+        res.status(400).send({});
       } else {
         res.status(200).send("Successfully deleted routesthrustations entity.");
       }
 
     });
   } else {
-    res.status(400).send( { error: "Error with deletion."});
+    res.status(400).send({});
   }
 });
 
-//Delets one stations entity
+//Deletes one entry in the Stations entity
 app.post('/stations/delete', function (req, res, next) {
   if (req.body.station_id) {
-    var query = "DELETE FROM stations WHERE stationID=?";
+    var query = "DELETE FROM Stations WHERE stationID=?";
     mysql.pool.query(query, [req.body.station_id], function (error, results, fields) {
       if (error) {
-        return next(error);
+        res.status(400).send({});
       } else {
         res.status(200).send("Successfully deleted stations entity.");
       }
     });
   } else {
-    res.status(400).send( { error: "Error with deletion."});
+    res.status(400).send({});
   }
 });
 
 
-
+//Catches all other paths
 app.use(function (req, res) {
-  console.error(err.stack);
   res.status(404);
   res.render('404');
 });
 
 
 app.use(function (err, req, res, next) {
-  console.error(err.stack);
   res.status(500);
   res.render('500');
 });
