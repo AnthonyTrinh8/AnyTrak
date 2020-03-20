@@ -30,10 +30,10 @@ var saveCards = document.getElementsByClassName("card");
 var saveStates = document.getElementsByClassName("station-state");
 
 function searchfunction() {
-  var stationID = document.getElementById("station_filter").value;
-  console.log(stationID);
+  var state = document.getElementById("station_filter").value;
+  console.log(state);
   //construct the URL and redirect to it
-  window.location = '/stations/filter/' + parseInt(stationID)
+  window.location = '/stations/filter/' + state
 }
 
 /* Sends request to insert Stations entry */

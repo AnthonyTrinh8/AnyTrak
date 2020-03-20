@@ -56,10 +56,10 @@ function getStation(res, mysql, context, complete) {
   });
 }
 
-//Get the Stations that corresponds to the stationID the user requested.
+//Get the Stations that corresponds to the state the user requested.
 function getStationsbyState(req, res, mysql, context, complete) {
-  var query = "SELECT stationID, stationname, address, state, city, zipcode FROM Stations WHERE stationID = ?";
-  var filter = [req.params.stationID];
+  var query = "SELECT stationID, stationname, address, state, city, zipcode FROM Stations WHERE state = ?";
+  var filter = [req.params.state];
   // console.log(filter);
 
   mysql.pool.query(query, filter, function (error, results, fields) {
@@ -183,7 +183,7 @@ app.get('/stations', function (req, res) {
 });
 
 //display the filtered stations. The extantion to the URL is /stations/search/:stationID
-app.get('/stations/filter/:stationID', function (req, res) {
+app.get('/stations/filter/:state', function (req, res) {
   var callbackCount = 0;
   var context = {};
   var mysql = req.app.get('mysql');

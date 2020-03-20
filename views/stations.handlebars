@@ -6,7 +6,7 @@
     <!--- this form does not submit directly, the button handles all the interaction with backend -->
     <select id='station_filter' name="station">
       {{#each data_dropdown}}
-      <option value="{{stationID}}">{{state}}</option>
+      <option value="{{this.state}}">{{this.state}}</option>
       {{/each}}
     </select><br>
   </div>
